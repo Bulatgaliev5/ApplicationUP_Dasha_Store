@@ -1,0 +1,26 @@
+﻿<Window x:Class="AplicationUP.Windows.Avtorizaciya"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AplicationUP.Windows"
+        mc:Ignorable="d"
+        Title="Авторизация"  Height="594" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid VerticalAlignment="Center">
+        <StackPanel>
+            <Image Source="/Image/logoo.png" Height="577" Width="383" Grid.Column="0" HorizontalAlignment="Left" />
+        </StackPanel>
+        <StackPanel Margin="386,0,0,0">
+            <TextBlock Text="Авторизация"   FontSize="36" Width="312" HorizontalAlignment="Center" Height="54"  FontFamily="Comic Sans MS" Foreground="#FF98C8EC" VerticalAlignment="Center" />
+            <Label Content="Пожалуйста введите данные от своего аккаунта"  VerticalContentAlignment="Center" Foreground="#FF6B6A6A" FontWeight="Bold" FontSize="14" Height="107"/>
+            <TextBlock Text="Логин"  Foreground="#FF98C8EC" Height="53" RenderTransformOrigin="0.5,0.458"  FontFamily="Comic Sans MS" FontSize="22" HorizontalAlignment="Left" FontWeight="Bold"  />
+
+            <TextBox x:Name="loginTBox" Height="35" FontSize="20"/>
+
+            <TextBlock Text="Пароль"  Height="43" Foreground="#FF98C8EC" FontFamily="Comic Sans MS" FontSize="22" FontWeight="Bold"/>
+
+            <PasswordBox x:Name="passTBox" Height="38" FontSize="20"/>
+            <Button Content="Войти" Width="100" Margin="0,10,0,10" Click="Vhod" Height="39" FontSize="20" FontFamily="Comic Sans MS" Background="#FF98C8EC" Foreground="White"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,58 @@
+﻿<Page x:Class="ApplicationUP.Pages.PageListGoods"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicationUP.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageListGoods" Background="#FF98C8EC">
+
+    <Grid Margin="15" Background="#FF98C8EC">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Label Content="Список товаров" Style="{DynamicResource Title}" FontFamily="Times New Roman" FontSize="36" Foreground="White" HorizontalContentAlignment="Center"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl x:Name="GoodsData">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel ItemWidth="240"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <ItemContainerTemplate>
+                        <Border Style="{DynamicResource BorderGoods}">
+                            <StackPanel Margin="7.5">
+                                <Image Width="200" Margin="7.5" Source="{Binding IMG}" Height="150"/>
+                                <StackPanel Background="#eee">
+                                    <UniformGrid Columns="2" Margin="5" Visibility="{Binding CanVisible}" IsEnabled="{Binding CanEdit}">
+                                        <Border MouseLeftButtonDown="GoodsEdit" Background="#99555555" Padding="5" ToolTip="Редактирование данных" HorizontalAlignment="Left">
+                                            <Image Style="{DynamicResource IconUser}" Source="/Icons/edit.png"/>
+                                        </Border>
+                                        <Border MouseLeftButtonDown="GoodsDelete" DataContext="{Binding }" Background="#99555555" Padding="5" ToolTip="Удаление данных" HorizontalAlignment="Right">
+                                            <Image Style="{DynamicResource IconUser}" Source="/Icons/delete.png"/>
+                                        </Border>
+                                    </UniformGrid>
+                                </StackPanel>
+                                <StackPanel Margin="7.5,0">
+                                    <TextBlock Style="{DynamicResource GoodsName}" Text="{Binding Name}"/>
+                                    <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding Desc}"/>
+                                    <TextBlock Style="{DynamicResource GoodsDiscount}" Text="Скидка"/>
+                                    <TextBlock Style="{DynamicResource GoodsCostOld}" Text="{Binding Discount}"/>
+                                    <TextBlock Style="{DynamicResource GoodsCostNew}" Text="{Binding Cost}"/>
+                                </StackPanel>
+                                <Border Margin="5" Style="{DynamicResource BorderBtn}">
+                                    <Label Content="Перейти" VerticalContentAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                    </ItemContainerTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page>
