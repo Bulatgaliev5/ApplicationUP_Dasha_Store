@@ -115,6 +115,10 @@ namespace ApplicationUP.Pages
                     price_tovara = Convert.ToSingle(reader["price_tovara"]),
                     date = Convert.ToDateTime(reader["date_zakaza"]),
                     count = Convert.ToInt32(reader["count"]),
+                    status = Convert.ToString(reader["status"]),
+        
+                    itogovaya_summa = Convert.ToSingle(reader["itogovaya_summa"]),
+
                 });
 
                 // Обновление данных колекции

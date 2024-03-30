@@ -29,7 +29,7 @@ namespace ApplicationUP.Pages
             ID;
         MainWindow
             window;
-        float price_tovara;
+        decimal price_tovara, itogovaya_summa;
         int id_tovara;
         string image;
         string user_login;
@@ -81,7 +81,7 @@ namespace ApplicationUP.Pages
                 id_tovara = Convert.ToInt32(reader["id_tovar"]);
                 InputCost.Content = reader["Cost"].ToString();
                 image = reader["Img"].ToString();
-                
+                price_tovara = Convert.ToDecimal(reader["Cost"]);
           
 
 
@@ -92,13 +92,17 @@ namespace ApplicationUP.Pages
                 bitmapImage.EndInit();
                 ImageImg.Source = bitmapImage;
 
-
+                Itog_Summa();
 
                 break;
             }
 
             await conn.GetClose();
             return;
+        }
+        public void Itog_Summa()
+        {
+            itogovaya_summa = Count * price_tovara;
         }
 
         private async Task<bool> zakazatSQL()
@@ -127,23 +131,26 @@ namespace ApplicationUP.Pages
             string
             sql =
             "INSERT INTO zakazi " +
-            "(login_user, name_tovara, img_tavara, price_tovara, date_zakaza, id_tovara, adress_dostavki, count, number_card) " +
-            "VALUES (@login_user, @name_tovara, @img_tavara, @price_tovara, @date_zakaza, @id_tovara, @adress_dostavki, @count, @number_card)";
+            "(login_user, name_tovara, img_tavara, price_tovara, date_zakaza, id_tovara, adress_dostavki, count, number_card,itogovaya_summa,status) " +
+            "VALUES (@login_user, @name_tovara, @img_tavara, @price_tovara, @date_zakaza, @id_tovara, @adress_dostavki, @count, @number_card,@itogovaya_summa,@status)";
             Connector
             conn = new Connector();
             MySqlCommand
             cmd = new MySqlCommand(sql, conn.GetConn());
-
+            string status = "Заказ в обработке";
 
             cmd.Parameters.Add(new MySqlParameter("@id_tovara", id_tovara));
             cmd.Parameters.Add(new MySqlParameter("@name_tovara", InputName.Content));
             cmd.Parameters.Add(new MySqlParameter("@img_tavara", image));
             cmd.Parameters.Add(new MySqlParameter("@adress_dostavki", TextBoxAdressDostavki.Text));
-            cmd.Parameters.Add(new MySqlParameter("@price_tovara", Convert.ToDecimal( InputCost.Content)));
+            cmd.Parameters.Add(new MySqlParameter("@price_tovara", price_tovara));
             cmd.Parameters.Add(new MySqlParameter("@date_zakaza", date_zakaza));
             cmd.Parameters.Add(new MySqlParameter("@login_user", user_login));
             cmd.Parameters.Add(new MySqlParameter("@count", Count));
             cmd.Parameters.Add(new MySqlParameter("@number_card", CardNumberTextBox.Text));
+            cmd.Parameters.Add(new MySqlParameter("@itogovaya_summa", itogovaya_summa));
+            cmd.Parameters.Add(new MySqlParameter("@status", status));
+
 
             await conn.GetOpen();
 

@@ -31,9 +31,11 @@
                                 
                                 <StackPanel Margin="7.5,0">
                                     <TextBlock Style="{DynamicResource GoodsName}" Text="{Binding name_tovara}"/>
-                                    <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding price_tovara,StringFormat=Цена: {0}}"/>
+                                    <TextBlock   Style="{DynamicResource GoodsDesc}" Text="{Binding price_tovara,StringFormat=Цена: {0}}"/>
                                     <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding count,StringFormat=Количество: {0}}"/>
-                                    <TextBlock Style="{DynamicResource GoodsCostNew}" Text="{Binding date,StringFormat=dd.MM.yyyy}"/>
+                                    <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding itogovaya_summa,StringFormat=Сумма заказа: {0}}"/>
+                                    <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding date,StringFormat=dd.MM.yyyy}"/>
+                                    <TextBlock TextWrapping="Wrap"  Style="{DynamicResource GoodsCostNew}" Text="{Binding status,StringFormat=Статус заказа: {0}}"/>
                                 </StackPanel>
                                 <Border Margin="5" Style="{DynamicResource BorderBtn}">
                                     <Label Content="Перейти" VerticalContentAlignment="Center"/>

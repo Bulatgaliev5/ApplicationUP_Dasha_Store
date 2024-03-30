@@ -24,8 +24,16 @@ namespace ApplicationUP.Template
         }
 
 
-        private string _loginuser;
+        private string _status;
        
+
+        public string status
+        {
+            get => _status;
+            set => _status = value;
+        }
+        private string _loginuser;
+
 
         public string loginuser
         {
@@ -54,6 +62,13 @@ namespace ApplicationUP.Template
         {
             get => _price_tovara;
             set => _price_tovara = value;
+        }
+        private float _itogovaya_summa;
+
+        public float itogovaya_summa
+        {
+            get => _itogovaya_summa;
+            set => _itogovaya_summa = value;
         }
 
         private DateTime _date;

@@ -15,7 +15,13 @@ namespace ApplicationUP.Template
         public int count
         {
             get => _count;
-            set => _count = value;
+            set
+            {
+                if (value <= 0)
+                    value = 1;
+
+                _count = value;
+            }
         }
         // Поле ID
         private int _id_tovar;

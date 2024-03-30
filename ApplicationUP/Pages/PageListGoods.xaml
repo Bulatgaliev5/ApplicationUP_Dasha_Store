@@ -70,7 +70,7 @@
                                         </Border>
 
                                         <Border x:Name="CountBorder"  DataContext="{Binding }" Background="#99555555" Padding="5" ToolTip="Удаление данных" HorizontalAlignment="Center">
-                                            <Label Content="0"  x:Name="CountLab" />
+                                            <Label Content="1"  x:Name="CountLab" />
                                         </Border>
 
                                         <Border  x:Name="plus" MouseLeftButtonDown="plus" DataContext="{Binding }" Background="#99555555" Padding="5" ToolTip="Удаление данных" HorizontalAlignment="Right">
