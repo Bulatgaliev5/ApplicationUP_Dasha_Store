@@ -29,23 +29,31 @@ namespace ApplicationUP
             pageListGoods;
         PageUpdateGoods
             pageUpdateGoods;
+        PageListZakaz
+            pageListZakaz;
+        PageOformirovanie
+            pageOformirovanie;
         Window
             window;
 
-        public MainWindow(Window win, string name, int role_id, string role_name)
+        public MainWindow(Window win, string name, int role_id, string role_name, string UserLogin)
         {
             InitializeComponent();
             window = win;
             pageGoods = new PageAddGoods(name, role_id, role_name);
-            pageListGoods = new PageListGoods(this, name, role_id, role_name);
+            pageListGoods = new PageListGoods(this, name, role_id, role_name, UserLogin);
+            pageListZakaz = new PageListZakaz(this, name, role_id, role_name, UserLogin);
+
 
             switch ((RoleGroup)role_id)
             {
                 case RoleGroup.Admin:
                     ButtonCreate.Visibility = Visibility.Visible;
+                    BtnKorzina.Visibility = Visibility.Collapsed;
                     break;
                 default:
                     ButtonCreate.Visibility = Visibility.Collapsed;
+                    BtnKorzina.Visibility = Visibility.Visible;
                     break;
             }
 
@@ -88,6 +96,14 @@ namespace ApplicationUP
             pageListGoods.ReloadData();
         }
 
+
+        public void GoToPageOformlenie(int ID, string UserLogin, int count)
+        {
+            pageOformirovanie = new PageOformirovanie(this, ID, UserLogin, count);
+            Frame1.NavigationService.Navigate(pageOformirovanie);
+           // pageOformirovanie.ReloadData();
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -102,6 +118,11 @@ namespace ApplicationUP
         private void MenuGoToPageListKorzina(object sender, MouseButtonEventArgs e)
         {
 
+          
+            Frame1.NavigationService.Navigate(pageListZakaz);
+            pageListZakaz.ReloadData();
         }
+
+      
     }
 }

@@ -53,9 +53,6 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=8.2.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.8.2.0\lib\net462\MySql.Data.dll</HintPath>
-    </Reference>
     <Reference Include="MySqlConnector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
       <HintPath>..\packages\MySqlConnector.2.2.7\lib\net471\MySqlConnector.dll</HintPath>
     </Reference>
@@ -119,8 +116,11 @@
     <Compile Include="Pages\PageAddGoods.xaml.cs">
       <DependentUpon>PageAddGoods.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PageListKorzina.xaml.cs">
-      <DependentUpon>PageListKorzina.xaml</DependentUpon>
+    <Compile Include="Pages\PageListZakaz.xaml.cs">
+      <DependentUpon>PageListZakaz.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageOformirovanie.xaml.cs">
+      <DependentUpon>PageOformirovanie.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PageUpdateGoods.xaml.cs">
       <DependentUpon>PageUpdateGoods.xaml</DependentUpon>
@@ -129,7 +129,7 @@
       <DependentUpon>PageWelcome.xaml</DependentUpon>
     </Compile>
     <Compile Include="Template\Goods.cs" />
-    <Compile Include="Template\Korzina.cs" />
+    <Compile Include="Template\Zakaz.cs" />
     <Page Include="Avtorizaciya.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -154,9 +154,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\PageListKorzina.xaml">
+    <Page Include="Pages\PageListZakaz.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageOformirovanie.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\PageUpdateGoods.xaml">
       <SubType>Designer</SubType>

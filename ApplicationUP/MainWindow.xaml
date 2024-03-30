@@ -42,14 +42,16 @@
                             </StackPanel>
                         </Border>
 
-                        <Border Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageListKorzina" Background="#FFE1F3F9">
+                        <Border x:Name="BtnKorzina" Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageListKorzina" Background="#FFE1F3F9">
                             <StackPanel Orientation="Horizontal">
                                 <StackPanel Style="{DynamicResource IconBack}" Background="#FF403F3F">
                                     <Image Source="/Icons/tovary.png" Margin="5"/>
                                 </StackPanel>
-                                <Label Content="Корзина" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Label Content="Мои заказы" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
+
+                      
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="1">

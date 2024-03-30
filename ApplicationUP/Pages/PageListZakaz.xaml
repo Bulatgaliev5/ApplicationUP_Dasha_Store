@@ -1,0 +1,48 @@
+﻿<Page x:Class="ApplicationUP.Pages.PageListZakaz"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicationUP.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageListZakaz">
+
+    <Grid Margin="15" Background="#FF98C8EC">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Label Content="Мои заказы" Style="{DynamicResource Title}" FontFamily="Times New Roman" FontSize="36" Foreground="White" HorizontalContentAlignment="Center"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl x:Name="zakazlistData">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel ItemWidth="240"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <ItemContainerTemplate>
+                        <Border Style="{DynamicResource BorderGoods}">
+                            <StackPanel Margin="7.5">
+                                <Image Width="200" Margin="7.5" Source="{Binding img_tavara}" Height="150"/>
+                                
+                                <StackPanel Margin="7.5,0">
+                                    <TextBlock Style="{DynamicResource GoodsName}" Text="{Binding name_tovara}"/>
+                                    <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding price_tovara,StringFormat=Цена: {0}}"/>
+                                    <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding count,StringFormat=Количество: {0}}"/>
+                                    <TextBlock Style="{DynamicResource GoodsCostNew}" Text="{Binding date,StringFormat=dd.MM.yyyy}"/>
+                                </StackPanel>
+                                <Border Margin="5" Style="{DynamicResource BorderBtn}">
+                                    <Label Content="Перейти" VerticalContentAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                    </ItemContainerTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page>

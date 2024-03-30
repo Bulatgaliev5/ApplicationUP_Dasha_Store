@@ -16,7 +16,8 @@ namespace AplicationUP.Windows
         int Role_id;
         string
             name,
-            Role_name;
+            Role_name,
+            UserLogin;
         public Avtorizaciya()
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace AplicationUP.Windows
                 return;
             }
             //  MessageBox.Show(string.Format("{0} - {1} - {2}", name, role_id, role_name));
-            MainWindow main = new MainWindow(this, name, Role_id, Role_name);
+            MainWindow main = new MainWindow(this, name, Role_id, Role_name, UserLogin);
 
             loginTBox.Text = "";
             passTBox.Password = "";
@@ -48,7 +49,7 @@ namespace AplicationUP.Windows
         {
             Connector con = new Connector();
 
-            string sql = " SELECT u.name AS 'UserName', r.role_id AS 'RoleID', r.name AS 'RoleName' FROM пользователи u, роли r WHERE u.login = @login AND u.parol = @pass AND u.role_id = r.role_id";
+            string sql = "SELECT u.name AS 'UserName', r.role_id AS 'RoleID', r.name AS 'RoleName',u.login AS 'UserLogin'  FROM пользователи u, роли r WHERE u.login = @login AND u.parol = @pass AND u.role_id = r.role_id";
 
             MySqlCommand cmd = new MySqlCommand(sql, con.GetConn());
             cmd.Parameters.Add(new MySqlParameter("@login", loginTBox.Text));
@@ -69,6 +70,7 @@ namespace AplicationUP.Windows
                 name = Convert.ToString(readed["UserName"]);
                 Role_name = Convert.ToString(readed["RoleName"]);
                 Role_id = Convert.ToInt32(readed["RoleID"]);
+                UserLogin = Convert.ToString(readed["UserLogin"]);
                 break;
             }
             //Console.WriteLine(readed["Name"]);

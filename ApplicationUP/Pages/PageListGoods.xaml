@@ -15,7 +15,21 @@
         </Grid.RowDefinitions>
         <StackPanel>
             <Label Content="Список товаров" Style="{DynamicResource Title}" FontFamily="Times New Roman" FontSize="36" Foreground="White" HorizontalContentAlignment="Center"/>
+
+            <StackPanel Orientation="Horizontal">
+
+                <TextBox Height="30" x:Name="TexSearch" Width="300"  HorizontalAlignment="Left"/>
+
+                <Button Width="70" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Content="Найти" Click="btnSearch"/>
+                
+             </StackPanel>
+            <StackPanel x:Name="stackPanel">
+                <RadioButton GroupName="Languages" Content="Цена по умолчанию" Checked="pricedefault" />
+                <RadioButton GroupName="Languages" Content="Цена по убыванию" Checked="pricepoubiv" />
+                <RadioButton GroupName="Languages" Content="Цена по возрастанию" Checked="pricepovos"/>
+            </StackPanel>
         </StackPanel>
+        
         <ScrollViewer Grid.Row="1">
             <ItemsControl x:Name="GoodsData">
                 <ItemsControl.ItemsPanel>
@@ -37,6 +51,7 @@
                                             <Image Style="{DynamicResource IconUser}" Source="/Icons/delete.png"/>
                                         </Border>
                                     </UniformGrid>
+                            
                                 </StackPanel>
                                 <StackPanel Margin="7.5,0">
                                     <TextBlock Style="{DynamicResource GoodsName}" Text="{Binding Name}"/>
@@ -45,9 +60,28 @@
                                     <TextBlock Style="{DynamicResource GoodsCostOld}" Text="{Binding Discount}"/>
                                     <TextBlock Style="{DynamicResource GoodsCostNew}" Text="{Binding Cost}"/>
                                 </StackPanel>
-                                <Border Margin="5" Style="{DynamicResource BorderBtn}">
-                                    <Label Content="Перейти" VerticalContentAlignment="Center"/>
-                                </Border>
+
+
+                                <StackPanel Background="#eee" Visibility="{Binding CanZakazVisible}" >
+                                    <UniformGrid  Columns="3" Margin="5" >
+
+                                        <Border x:Name="minus" MouseLeftButtonDown="minus" Background="#99555555" Padding="5" ToolTip="Редактирование данных" HorizontalAlignment="Left">
+                                            <Image Style="{DynamicResource IconUser}" Source="/Icons/edit.png"/>
+                                        </Border>
+
+                                        <Border x:Name="CountBorder"  DataContext="{Binding }" Background="#99555555" Padding="5" ToolTip="Удаление данных" HorizontalAlignment="Center">
+                                            <Label Content="0"  x:Name="CountLab" />
+                                        </Border>
+
+                                        <Border  x:Name="plus" MouseLeftButtonDown="plus" DataContext="{Binding }" Background="#99555555" Padding="5" ToolTip="Удаление данных" HorizontalAlignment="Right">
+                                            <Image Style="{DynamicResource IconUser}" Source="/Icons/delete.png"/>
+                                        </Border>
+                                    </UniformGrid>
+                                    <Border MouseLeftButtonDown="addzakazat"  Margin="5" Style="{DynamicResource BorderBtn}" ToolTip="Редактирование данных" >
+                                        <Label  Content="Заказать"/>
+                                    </Border>
+                                </StackPanel>
+                              
                             </StackPanel>
                         </Border>
                     </ItemContainerTemplate>

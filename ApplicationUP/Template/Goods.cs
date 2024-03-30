@@ -9,6 +9,14 @@ namespace ApplicationUP.Template
 {
     public class Goods
     {
+
+
+        private int _count;
+        public int count
+        {
+            get => _count;
+            set => _count = value;
+        }
         // Поле ID
         private int _id_tovar;
         private string _name;
@@ -19,6 +27,9 @@ namespace ApplicationUP.Template
         private int _V_nalichii;
         private bool _CanEdit;
         private Visibility _CanVisible;
+        private bool _CanZakaz;
+        private Visibility _CanZakazVisible;
+
 
         /// <summary>
         /// Свойство ID
@@ -89,6 +100,17 @@ namespace ApplicationUP.Template
         {
             get => _CanVisible;
             set => _CanVisible = value;
+        }
+
+        public bool CanZakaz
+        {
+            get => _CanZakaz;
+            set => _CanZakaz = value;
+        }
+        public Visibility CanZakazVisible
+        {
+            get => _CanZakazVisible;
+            set => _CanZakazVisible = value;
         }
     }
 }

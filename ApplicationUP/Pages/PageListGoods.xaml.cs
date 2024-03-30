@@ -8,6 +8,9 @@ using ApplicationUP.Core;
 using MySqlConnector;
 using System.Windows.Input;
 using static ApplicationUP.Core.CoreSys;
+using System.Xml.Linq;
+using System.Diagnostics.Metrics;
+using System.Linq;
 
 namespace ApplicationUP.Pages
 {
@@ -21,14 +24,18 @@ namespace ApplicationUP.Pages
             window;
         RoleGroup
             role;
+        string
+            Loginuser;
+      
+
 
         // Конструктор
-        public PageListGoods(MainWindow main, string name, int role_id, string role_name)
+        public PageListGoods(MainWindow main, string name, int role_id, string role_name,string loginuser)
         {
             InitializeComponent();
             window = main;
             role = (RoleGroup)role_id;
-
+            Loginuser = loginuser;
             // Коллекция товаров используется как источник данных для ItemsControl
             GoodsData.ItemsSource = goods;
             // Вызов метода загрузки данных
@@ -44,9 +51,10 @@ namespace ApplicationUP.Pages
 
             // Вызов метода загрузки данных
             await LoadGoods();
-
+            
             // Обновление данных колекции
             GoodsData.Items.Refresh();
+            GoodsData.ItemsSource = goods;
         }
 
         public void ReloadData()
@@ -107,7 +115,9 @@ namespace ApplicationUP.Pages
                     CountInContainer = Convert.ToInt32(reader["V_nalichii"]),
                     IMG = reader["Img"].ToString(),
                     CanEdit = TypeRoleGet(role),
-                    CanVisible = TypeRoleGet(role) ? Visibility.Visible : Visibility.Collapsed
+                    CanVisible = TypeRoleGet(role) ? Visibility.Visible : Visibility.Collapsed,
+                    CanZakaz = TypeRoleGet(role),
+                    CanZakazVisible = TypeRoleGet(role) ? Visibility.Collapsed : Visibility.Visible
                 });
 
                 // Обновление данных колекции
@@ -200,6 +210,80 @@ namespace ApplicationUP.Pages
         {
             if (sender is Border b && b.DataContext is Goods g)
                 window.GoToPageGoodsUpdate(g.ID);
+        }
+
+      
+
+
+ 
+
+        private void addzakazat(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border b && b.DataContext is Goods g)
+                window.GoToPageOformlenie(g.ID, Loginuser, g.count);
+
+         
+        }
+
+        public void plus(object sender, MouseButtonEventArgs e)
+        {
+
+            if (sender is Border b && b.DataContext is Goods g)
+            {
+                Label countLabel = b.FindName("CountLab") as Label;
+                g.count++;
+                countLabel.Content = g.count;
+            }
+        }
+
+        public void minus(object sender, MouseButtonEventArgs e)
+        {
+
+            if (sender is Border b && b.DataContext is Goods g)
+            {
+                Label countLabel = b.FindName("CountLab") as Label;
+                if (g. count > 0) // проверка, чтобы count не стал отрицательным
+                {
+                    g.count--;
+                    countLabel.Content = g.count;
+                }
+
+            }
+        }
+
+        private void btnSearch(object sender, RoutedEventArgs e)
+        {
+            if (IsValidText(TexSearch))
+            {
+                Load();
+                
+            }
+            else
+            {
+
+                GoodsData.ItemsSource=goods.Where(a=>a.Name== TexSearch.Text).ToList();
+            }
+        }
+
+        private bool IsValidText(TextBox box)
+        {
+            return string.IsNullOrEmpty(box.Text) || box.Text.Length < 1;
+        }
+
+        private void pricepoubiv(object sender, RoutedEventArgs e)
+        {
+            
+            GoodsData.ItemsSource = goods.OrderByDescending(a => a.Cost).ToList();
+        }
+
+        private void pricedefault(object sender, RoutedEventArgs e)
+        {
+            Load();
+        }
+
+        private void pricepovos(object sender, RoutedEventArgs e)
+        {
+            GoodsData.ItemsSource = goods.OrderBy(a => a.Cost).ToList();
         }
     }
 }
