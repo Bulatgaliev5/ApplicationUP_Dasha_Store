@@ -6,10 +6,7 @@
         xmlns:local="clr-namespace:ApplicationUP"
         mc:Ignorable="d"
         Title="Приложение Товаров"
-        MinHeight="600" 
-        MinWidth="800" 
-        Height="600" 
-        Width="800"
+                MinHeight="550" MinWidth="1000" WindowState="Maximized"
 >
     <Grid>
         <Grid.ColumnDefinitions>
@@ -27,16 +24,16 @@
                         <Label Content="Магазин товаров" Style="{DynamicResource Title}" FontSize="21" Width="312"  Height="54"  FontFamily="Comic Sans MS" Foreground="Black" VerticalAlignment="Center" RenderTransformOrigin="0.58,0.538"/>
                         <Border x:Name="ButtonCreate" Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageAddGoods" Background="#FFE1F3F9">
                             <StackPanel Orientation="Horizontal">
-                                <StackPanel Style="{DynamicResource IconBack}">
-                                    <Image Source="/Icons/plus.png" Margin="5"/>
+                                <StackPanel Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
+                                    <Image Source="/Icons/plus.png" Margin="5" Width="20"/>
                                 </StackPanel>
                                 <Label Content="Новый товар" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22"/>
                             </StackPanel>
                         </Border>
                         <Border Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageListGoods" Background="#FFE1F3F9">
                             <StackPanel Orientation="Horizontal">
-                                <StackPanel Style="{DynamicResource IconBack}" Background="#FF403F3F">
-                                    <Image Source="/Icons/tovary.png" Margin="5"/>
+                                <StackPanel Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
+                                    <Image Source="/Icons/tovar.png" Margin="5" Width="20"/>
                                 </StackPanel>
                                 <Label Content="Товары" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </StackPanel>
@@ -44,14 +41,24 @@
 
                         <Border x:Name="BtnKorzina" Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageListKorzina" Background="#FFE1F3F9">
                             <StackPanel Orientation="Horizontal">
-                                <StackPanel Style="{DynamicResource IconBack}" Background="#FF403F3F">
-                                    <Image Source="/Icons/tovary.png" Margin="5"/>
+                                <StackPanel Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
+                                    <Image Source="/Icons/korzina.png" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20"/>
                                 </StackPanel>
                                 <Label Content="Мои заказы" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
-                      
+                        <Border x:Name="BtnZakazAdmin" Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageListZakazAdmin" Background="#FFE1F3F9">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
+                                    <Image Source="/Icons/korzina.png" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20"/>
+                                </StackPanel>
+                                <Label Content="Заказы" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+
+
+
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="1">

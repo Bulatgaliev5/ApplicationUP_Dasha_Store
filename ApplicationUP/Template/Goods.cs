@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,9 +8,18 @@ using System.Windows;
 
 namespace ApplicationUP.Template
 {
-    public class Goods
+    public class Goods : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        public void OnPropertyChanged(string property)
+        {
+            if (property == null)
+                return;
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+
+        }
 
         private int _count;
         public int count
@@ -21,6 +31,7 @@ namespace ApplicationUP.Template
                     value = 1;
 
                 _count = value;
+                OnPropertyChanged("count");
             }
         }
         // Поле ID

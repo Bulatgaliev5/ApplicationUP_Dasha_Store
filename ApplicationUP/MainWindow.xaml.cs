@@ -31,6 +31,8 @@ namespace ApplicationUP
             pageUpdateGoods;
         PageListZakaz
             pageListZakaz;
+        PageListZakazAdmin
+            pageListZakazAdmin;
         PageOformirovanie
             pageOformirovanie;
         Window
@@ -43,17 +45,19 @@ namespace ApplicationUP
             pageGoods = new PageAddGoods(name, role_id, role_name);
             pageListGoods = new PageListGoods(this, name, role_id, role_name, UserLogin);
             pageListZakaz = new PageListZakaz(this, name, role_id, role_name, UserLogin);
-
+            pageListZakazAdmin = new PageListZakazAdmin(this, name, role_id, role_name);
 
             switch ((RoleGroup)role_id)
             {
                 case RoleGroup.Admin:
                     ButtonCreate.Visibility = Visibility.Visible;
                     BtnKorzina.Visibility = Visibility.Collapsed;
+                    BtnZakazAdmin.Visibility = Visibility.Visible;
                     break;
                 default:
                     ButtonCreate.Visibility = Visibility.Collapsed;
                     BtnKorzina.Visibility = Visibility.Visible;
+                    BtnZakazAdmin.Visibility = Visibility.Collapsed;
                     break;
             }
 
@@ -123,6 +127,10 @@ namespace ApplicationUP
             pageListZakaz.ReloadData();
         }
 
-      
+        private void MenuGoToPageListZakazAdmin(object sender, MouseButtonEventArgs e)
+        {
+            Frame1.NavigationService.Navigate(pageListZakazAdmin);
+            pageListZakazAdmin.ReloadData();
+        }
     }
 }

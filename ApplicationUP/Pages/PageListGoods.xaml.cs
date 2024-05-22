@@ -11,6 +11,8 @@ using static ApplicationUP.Core.CoreSys;
 using System.Xml.Linq;
 using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Data;
+using System.Windows.Controls.Primitives;
 
 namespace ApplicationUP.Pages
 {
@@ -45,36 +47,40 @@ namespace ApplicationUP.Pages
         public async void Load()
         {
             // Список товаров опусташается
-            goods.Clear();
+      
+        
             // Обновление данных колекции
-            GoodsData.Items.Refresh();
+          //  GoodsData.Items.Refresh();
 
             // Вызов метода загрузки данных
             await LoadGoods();
             
             // Обновление данных колекции
+
             GoodsData.Items.Refresh();
-            GoodsData.ItemsSource = goods;
+          
         }
 
         public void ReloadData()
         {
+            goods.Clear();
             Load();
         }
 
         private async Task LoadGoods()
         {
+
+            Connector
+                conn = new Connector();
             // Строка запроса
             string
-                sql = "SELECT * FROM товары";
+                sql = "ПолучитьТоварыВНаличии";
 
             // Объявление переменной на основе класс подключения:
             // >    Connector conn
             // Инициализация переменной:
             // >    = new Connector()
 
-            Connector
-                conn = new Connector();
 
             // Объявление объекта команды:
             // >    MySqlCommand cmd
@@ -82,6 +88,7 @@ namespace ApplicationUP.Pages
             // >    new MySqlCommand(sql, conn.GetConn());
             MySqlCommand
                 cmd = new MySqlCommand(sql, conn.GetConn());
+            cmd.CommandType = CommandType.StoredProcedure;
 
             // Асинхронное подключение к БД
             await conn.GetOpen();
@@ -117,17 +124,19 @@ namespace ApplicationUP.Pages
                     CanEdit = TypeRoleGet(role),
                     CanVisible = TypeRoleGet(role) ? Visibility.Visible : Visibility.Collapsed,
                     CanZakaz = TypeRoleGet(role),
-                    CanZakazVisible = TypeRoleGet(role) ? Visibility.Collapsed : Visibility.Visible
-                });
+                    CanZakazVisible = TypeRoleGet(role) ? Visibility.Collapsed : Visibility.Visible,
+                    count = 1
+                }) ;
 
                 // Обновление данных колекции
-                GoodsData.Items.Refresh();
+               // GoodsData.Items.Refresh();
                 // Время ожидания (Время "Сна")
-                await Task.Delay(250);
+                
             }
 
             // Асинхронное отключение от БД
             await conn.GetClose();
+                  GoodsData.ItemsSource = goods;
             // Возращение true
             return;
         }
@@ -231,8 +240,11 @@ namespace ApplicationUP.Pages
             if (sender is Border b && b.DataContext is Goods g)
             {
                 Label countLabel = b.FindName("CountLab") as Label;
-                g.count++;
-                countLabel.Content = g.count;
+                if (g.count < g.CountInContainer) // проверка, чтобы count не стал отрицательным
+                {
+                    g.count++;
+                    countLabel.Content = g.count;
+                }
             }
         }
 
@@ -242,7 +254,7 @@ namespace ApplicationUP.Pages
             if (sender is Border b && b.DataContext is Goods g)
             {
                 Label countLabel = b.FindName("CountLab") as Label;
-                if (g. count > 0) // проверка, чтобы count не стал отрицательным
+                if (g.count > 0) // проверка, чтобы count не стал отрицательным
                 {
                     g.count--;
                     countLabel.Content = g.count;
@@ -253,16 +265,7 @@ namespace ApplicationUP.Pages
 
         private void btnSearch(object sender, RoutedEventArgs e)
         {
-            if (IsValidText(TexSearch))
-            {
-                Load();
-                
-            }
-            else
-            {
-
-                GoodsData.ItemsSource=goods.Where(a=>a.Name== TexSearch.Text).ToList();
-            }
+           
         }
 
         private bool IsValidText(TextBox box)
@@ -284,6 +287,13 @@ namespace ApplicationUP.Pages
         private void pricepovos(object sender, RoutedEventArgs e)
         {
             GoodsData.ItemsSource = goods.OrderBy(a => a.Cost).ToList();
+        }
+
+        private void tc(object sender, TextChangedEventArgs e)
+        {
+            var result = goods.Where(a => a.Name.ToLower().StartsWith(tb1.Text.ToLower()));
+            GoodsData.ItemsSource = null;
+            GoodsData.ItemsSource = result;
         }
     }
 }

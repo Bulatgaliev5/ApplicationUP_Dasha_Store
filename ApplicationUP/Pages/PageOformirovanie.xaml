@@ -4,6 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ApplicationUP.Pages"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+     
       mc:Ignorable="d" 
       d:DesignHeight="595.753" d:DesignWidth="800"
       Title="PageOformirovanie" Background="#FF98C8EC">
@@ -38,16 +40,25 @@
                 <StackPanel Width="420" HorizontalAlignment="Center">
                     <TextBlock  Text="Введите данные вашей банковской карты:" FontSize="16"  Margin="10"/>
                     <Label Content="Введите номер карты"/>
-                    <TextBox  x:Name="CardNumberTextBox"   Margin="10"/>
+                    <xctk:MaskedTextBox x:Name="CardNumberTextBox"
+                             Mask="0000 0000 0000 0000" FontSize="20"
+                              />
+                    <!--<TextBox PreviewTextInput="Maskavvoda"  x:Name="CardNumberTextBox"   Margin="10"/>-->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                         <StackPanel Margin="5" >
-                        <Label Content="Введите срок действия карты"/>
-                        <TextBox x:Name="DateTextBox" Width="200" />
+                        <Label  Content="Введите срок действия карты"/>
+                            <xctk:MaskedTextBox x:Name="DateTextBox"
+                             Mask="00/00" FontSize="20"
+                              />
+
                             
                         </StackPanel>
                         <StackPanel Margin="5" >
-                            <Label Content="Введите CVV код"/>
-                            <TextBox x:Name="CVVTextBox" Width="200"/>
+                            <Label Content="Введите CVV код" />
+                            <xctk:MaskedTextBox x:Name="CVVTextBox"
+                             Mask="000" FontSize="20"
+                              />
+
                         </StackPanel>
                     </StackPanel>
                    

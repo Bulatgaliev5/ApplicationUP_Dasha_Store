@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Xceed.Wpf.AvalonDock.Themes;
 
 namespace ApplicationUP.Pages
 {
@@ -75,14 +76,14 @@ namespace ApplicationUP.Pages
 
             while (await reader.ReadAsync())
             {
-                
+
                 InputName.Content = reader["name"].ToString();
                 countlabel.Content = Count;
                 id_tovara = Convert.ToInt32(reader["id_tovar"]);
                 InputCost.Content = reader["Cost"].ToString();
                 image = reader["Img"].ToString();
                 price_tovara = Convert.ToDecimal(reader["Cost"]);
-          
+
 
 
                 string imagePath = image; // Замените на путь к вашему изображению
@@ -100,6 +101,9 @@ namespace ApplicationUP.Pages
             await conn.GetClose();
             return;
         }
+
+
+
         public void Itog_Summa()
         {
             itogovaya_summa = Count * price_tovara;
@@ -112,17 +116,17 @@ namespace ApplicationUP.Pages
                 TextBoxAdressDostavki.Focusable = true;
                 return false;
             }
-            else if (IsValidText(CardNumberTextBox))
+            else if (!CardNumberTextBox.IsMaskFull)
             {
                 CardNumberTextBox.Focusable = true;
                 return false;
             }
-            else if (IsValidText(DateTextBox))
+            else if (!CardNumberTextBox.IsMaskFull)
             {
                 DateTextBox.Focusable = true;
                 return false;
             }
-            else if (IsValidText(CVVTextBox))
+            else if (!CardNumberTextBox.IsMaskFull)
             {
                 CVVTextBox.Focusable = true;
                 return false;
@@ -172,11 +176,22 @@ namespace ApplicationUP.Pages
       
 
 
-
         private void IsValueNumberChech(object sender, TextCompositionEventArgs e)
         {
             e.Handled = Regex.IsMatch(e.Text, @"[^0-9]$");
         }
+
+        private void Maskavvoda(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, 0))
+            {
+                e.Handled = true;
+                MessageBox.Show("Введите число!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+        }
+
+ 
 
         private async void btnzakazat(object sender, MouseButtonEventArgs e)
         {
@@ -186,12 +201,12 @@ namespace ApplicationUP.Pages
             if (status)
             {
 
-                MessageBox.Show("Заказ оплачен", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("заказ принят", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
                 window.GoToPageGoodsList();
             }
 
             else
-                MessageBox.Show("Заказ не оплачен", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("заказ не принят. Заполните все поля", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Information);
 
             window.GoToPageOformlenie(ID, user_login, Count);
             

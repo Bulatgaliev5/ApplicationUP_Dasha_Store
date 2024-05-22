@@ -6,27 +6,20 @@
       xmlns:local="clr-namespace:ApplicationUP.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageListGoods" Background="#FF98C8EC">
+      Title="PageListGoods" Background="#FFF">
 
-    <Grid Margin="15" Background="#FF98C8EC">
+    <Grid Margin="15" Background="#FFF">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <Label Content="Список товаров" Style="{DynamicResource Title}" FontFamily="Times New Roman" FontSize="36" Foreground="White" HorizontalContentAlignment="Center"/>
-
-            <StackPanel Orientation="Horizontal">
-
-                <TextBox Height="30" x:Name="TexSearch" Width="300"  HorizontalAlignment="Left"/>
-
-                <Button Width="70" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Content="Найти" Click="btnSearch"/>
-                
-             </StackPanel>
+            <Label Content="Список товаров" Style="{DynamicResource Title}" FontFamily="Times New Roman" FontSize="36" Foreground="#FF61B0EC" HorizontalContentAlignment="Center"/>
+            <TextBox x:Name="tb1" TextChanged="tc" Width="430" HorizontalAlignment="Left"/>
             <StackPanel x:Name="stackPanel">
-                <RadioButton GroupName="Languages" Content="Цена по умолчанию" Checked="pricedefault" />
-                <RadioButton GroupName="Languages" Content="Цена по убыванию" Checked="pricepoubiv" />
-                <RadioButton GroupName="Languages" Content="Цена по возрастанию" Checked="pricepovos"/>
+                <RadioButton GroupName="Languages" Content="Цена по умолчанию" Checked="pricedefault"  FontFamily="Times New Roman" FontSize="20" Foreground="#FF61B0EC"/>
+                <RadioButton GroupName="Languages" Content="Цена по убыванию" Checked="pricepoubiv" FontFamily="Times New Roman" FontSize="20" Foreground="#FF61B0EC"/>
+                <RadioButton GroupName="Languages" Content="Цена по возрастанию" Checked="pricepovos" FontFamily="Times New Roman" FontSize="20" Foreground="#FF61B0EC"/>
             </StackPanel>
         </StackPanel>
         
@@ -39,16 +32,16 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <ItemContainerTemplate>
-                        <Border Style="{DynamicResource BorderGoods}">
+                        <Border Style="{DynamicResource BorderGoods}" Background="#FF98C8EC">
                             <StackPanel Margin="7.5">
                                 <Image Width="200" Margin="7.5" Source="{Binding IMG}" Height="150"/>
-                                <StackPanel Background="#eee">
+                                <StackPanel Background="#FF98C8EC">
                                     <UniformGrid Columns="2" Margin="5" Visibility="{Binding CanVisible}" IsEnabled="{Binding CanEdit}">
-                                        <Border MouseLeftButtonDown="GoodsEdit" Background="#99555555" Padding="5" ToolTip="Редактирование данных" HorizontalAlignment="Left">
-                                            <Image Style="{DynamicResource IconUser}" Source="/Icons/edit.png"/>
+                                        <Border MouseLeftButtonDown="GoodsEdit" Background="#FF98C8EC" Padding="5" ToolTip="Редактирование данных" HorizontalAlignment="Left">
+                                            <Image Style="{DynamicResource IconUser}" Source="/Icons/redact.png" Width="25"/>
                                         </Border>
-                                        <Border MouseLeftButtonDown="GoodsDelete" DataContext="{Binding }" Background="#99555555" Padding="5" ToolTip="Удаление данных" HorizontalAlignment="Right">
-                                            <Image Style="{DynamicResource IconUser}" Source="/Icons/delete.png"/>
+                                        <Border MouseLeftButtonDown="GoodsDelete" DataContext="{Binding }" Background="#FF98C8EC" Padding="5" ToolTip="Удаление данных" HorizontalAlignment="Right">
+                                            <Image Style="{DynamicResource IconUser}" Source="/Icons/udal.png" Width="25"/>
                                         </Border>
                                     </UniformGrid>
                             
@@ -56,29 +49,31 @@
                                 <StackPanel Margin="7.5,0">
                                     <TextBlock Style="{DynamicResource GoodsName}" Text="{Binding Name}"/>
                                     <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding Desc}"/>
+                                    <TextBlock  Text="{Binding CountInContainer,StringFormat='В наличии: {0} шт.'}"
+                                        FontSize="15"        Margin="0,0,0,5"/>
                                     <TextBlock Style="{DynamicResource GoodsDiscount}" Text="Скидка"/>
-                                    <TextBlock Style="{DynamicResource GoodsCostOld}" Text="{Binding Discount}"/>
-                                    <TextBlock Style="{DynamicResource GoodsCostNew}" Text="{Binding Cost}"/>
+                                    <TextBlock Style="{DynamicResource GoodsCostOld}" Text="{Binding Discount,StringFormat=' {0} рублей'}"/>
+                                    <TextBlock Style="{DynamicResource GoodsCostNew}" Text="{Binding Cost,StringFormat=' {0} рублей'}"/>
                                 </StackPanel>
 
 
-                                <StackPanel Background="#eee" Visibility="{Binding CanZakazVisible}" >
+                                <StackPanel Background="#FF98C8EC" Visibility="{Binding CanZakazVisible}" >
                                     <UniformGrid  Columns="3" Margin="5" >
 
-                                        <Border x:Name="minus" MouseLeftButtonDown="minus" Background="#99555555" Padding="5" ToolTip="Редактирование данных" HorizontalAlignment="Left">
-                                            <Image Style="{DynamicResource IconUser}" Source="/Icons/edit.png"/>
+                                        <Border x:Name="minus" MouseLeftButtonDown="minus" Background="#FF98C8EC" Padding="5" ToolTip="Редактирование данных" HorizontalAlignment="Left">
+                                            <Image Style="{DynamicResource IconUser}" Source="/Icons/minus.png"/>
                                         </Border>
 
-                                        <Border x:Name="CountBorder"  DataContext="{Binding }" Background="#99555555" Padding="5" ToolTip="Удаление данных" HorizontalAlignment="Center">
-                                            <Label Content="1"  x:Name="CountLab" />
+                                        <Border x:Name="CountBorder"  DataContext="{Binding }" Background="#FF98C8EC" Padding="5" ToolTip="Удаление данных" HorizontalAlignment="Center">
+                                            <Label Content="{Binding count}"  x:Name="CountLab" />
                                         </Border>
 
-                                        <Border  x:Name="plus" MouseLeftButtonDown="plus" DataContext="{Binding }" Background="#99555555" Padding="5" ToolTip="Удаление данных" HorizontalAlignment="Right">
-                                            <Image Style="{DynamicResource IconUser}" Source="/Icons/delete.png"/>
+                                        <Border  x:Name="plus" MouseLeftButtonDown="plus" DataContext="{Binding }" Background="#FF98C8EC" Padding="5" ToolTip="Удаление данных" HorizontalAlignment="Right">
+                                            <Image Style="{DynamicResource IconUser}" Source="/Icons/plus.png"/>
                                         </Border>
                                     </UniformGrid>
-                                    <Border MouseLeftButtonDown="addzakazat"  Margin="5" Style="{DynamicResource BorderBtn}" ToolTip="Редактирование данных" >
-                                        <Label  Content="Заказать"/>
+                                    <Border MouseLeftButtonDown="addzakazat"  Margin="5"   Background="#FF98C8EC" ToolTip="Редактирование данных" >
+                                        <Label  Content="Заказать" FontFamily="Times New Roman" FontSize="20"/>
                                     </Border>
                                 </StackPanel>
                               

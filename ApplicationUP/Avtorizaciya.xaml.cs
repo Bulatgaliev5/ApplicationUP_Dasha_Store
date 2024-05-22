@@ -49,7 +49,7 @@ namespace AplicationUP.Windows
         {
             Connector con = new Connector();
 
-            string sql = "SELECT u.name AS 'UserName', r.role_id AS 'RoleID', r.name AS 'RoleName',u.login AS 'UserLogin'  FROM пользователи u, роли r WHERE u.login = @login AND u.parol = @pass AND u.role_id = r.role_id";
+            string sql = "SELECT u.name AS 'UserName', r.role_id AS 'RoleID', r.name AS 'RoleName',u.login AS 'UserLogin'  FROM пользователи u, роли r WHERE BINARY u.login = @login AND u.parol = @pass AND u.role_id = r.role_id";
 
             MySqlCommand cmd = new MySqlCommand(sql, con.GetConn());
             cmd.Parameters.Add(new MySqlParameter("@login", loginTBox.Text));

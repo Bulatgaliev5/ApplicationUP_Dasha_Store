@@ -23,7 +23,7 @@ namespace ApplicationUP.Pages
     /// Логика взаимодействия для PageListKorzina.xaml
     /// </summary>
     /// 
-    public partial class PageListZakaz : Page
+    public partial class PageListZakazAdmin : Page
     {
         IList<Zakaz>
               zakazlist = new List<Zakaz>();
@@ -31,21 +31,20 @@ namespace ApplicationUP.Pages
             window;
         RoleGroup
             role;
-        string userlogin;
-        public PageListZakaz(MainWindow main, string name, int role_id, string role_name , string UserLogin)
+
+        public PageListZakazAdmin(MainWindow main, string name, int role_id, string role_name)
         {
             InitializeComponent();
 
             window = main;
             role = (RoleGroup)role_id;
-            userlogin =  UserLogin;
             // Коллекция товаров используется как источник данных для ItemsControl
             zakazlistData.ItemsSource = zakazlist;
             // Вызов метода загрузки данных
-            Load(userlogin);
+            Load();
         }
 
-        public async void Load(string login_user)
+        public async void Load()
         {
             // Список товаров опусташается
             zakazlist.Clear();
@@ -53,21 +52,21 @@ namespace ApplicationUP.Pages
             zakazlistData.Items.Refresh();
 
             // Вызов метода загрузки данных
-            await LoadGoods(login_user);
+            await LoadGoods();
 
             // Обновление данных колекции
             zakazlistData.Items.Refresh();
         }
         public void ReloadData()
         {
-            Load(userlogin);
+            Load();
         }
 
-        private async Task LoadGoods(string login_user)
+        private async Task LoadGoods()
         {
             // Строка запроса
             string
-                sql = "SELECT * FROM zakazi where login_user=@login_user";
+                sql = "SELECT * FROM zakazi";
 
             // Объявление переменной на основе класс подключения:
             // >    Connector conn
@@ -83,7 +82,6 @@ namespace ApplicationUP.Pages
             // >    new MySqlCommand(sql, conn.GetConn());
             MySqlCommand
                 cmd = new MySqlCommand(sql, conn.GetConn());
-            cmd.Parameters.Add(new MySqlParameter("@login_user", login_user));
             // Асинхронное подключение к БД
             await conn.GetOpen();
 
@@ -116,7 +114,6 @@ namespace ApplicationUP.Pages
                     date = Convert.ToDateTime(reader["date_zakaza"]),
                     count = Convert.ToInt32(reader["count"]),
                     status = Convert.ToString(reader["status"]),
-        
                     itogovaya_summa = Convert.ToSingle(reader["itogovaya_summa"]),
 
                 });
