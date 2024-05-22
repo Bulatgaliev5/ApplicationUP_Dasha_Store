@@ -146,6 +146,9 @@
     <Compile Include="Pages\PageUpdateGoods.xaml.cs">
       <DependentUpon>PageUpdateGoods.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PageUpdateStatus.xaml.cs">
+      <DependentUpon>PageUpdateStatus.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PageWelcome.xaml.cs">
       <DependentUpon>PageWelcome.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\PageUpdateGoods.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageUpdateStatus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

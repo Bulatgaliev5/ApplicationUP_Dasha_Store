@@ -37,7 +37,11 @@
                                     <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding date,StringFormat=dd.MM.yyyy}"/>
                                     <TextBlock TextWrapping="Wrap"  Style="{DynamicResource GoodsCostNew}" Text="{Binding status,StringFormat=Статус заказа: {0}}"/>
                                 </StackPanel>
+                                <Border MouseLeftButtonDown="UpdateStatus" BorderBrush="Black" BorderThickness="1"  Margin="5"   Background="#FF98C8EC" ToolTip="Редактирование данных" >
+                                    <Label  Content="Изменить статус заказа" FontFamily="Times New Roman" FontSize="20"/>
+                                </Border>
                             </StackPanel>
+                            
                         </Border>
                     </ItemContainerTemplate>
                 </ItemsControl.ItemTemplate>

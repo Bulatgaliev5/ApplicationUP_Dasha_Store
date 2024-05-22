@@ -131,7 +131,18 @@ namespace ApplicationUP.Pages
             // Возращение true
             return;
         }
-      
 
+        private void UpdateStatus(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border b && b.DataContext is Zakaz g)
+            {
+                PageUpdateStatus pageUpdateStatus = new PageUpdateStatus(g.id_zakaza);
+                this.Opacity = 0.5;
+                pageUpdateStatus.ShowDialog();
+                pageUpdateStatus.Focus();
+                this.Opacity = 1;
+
+            }
+        }
     }
 }
