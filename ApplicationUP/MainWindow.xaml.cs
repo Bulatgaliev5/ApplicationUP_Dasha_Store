@@ -35,13 +35,15 @@ namespace ApplicationUP
             pageListZakazAdmin;
         PageOformirovanie
             pageOformirovanie;
-        Window
-            window;
+        PageUser
+             pageUser;
 
-        public MainWindow(Window win, string name, int role_id, string role_name, string UserLogin)
+
+        public MainWindow( string name, int role_id, string role_name, string UserLogin)
         {
             InitializeComponent();
-            window = win;
+
+            pageUser = new PageUser();
             pageGoods = new PageAddGoods(name, role_id, role_name);
             pageListGoods = new PageListGoods(this, name, role_id, role_name, UserLogin);
             pageListZakaz = new PageListZakaz(this, name, role_id, role_name, UserLogin);
@@ -105,7 +107,14 @@ namespace ApplicationUP
         {
             pageOformirovanie = new PageOformirovanie(this, ID, UserLogin, count);
             Frame1.NavigationService.Navigate(pageOformirovanie);
-           // pageOformirovanie.ReloadData();
+            Frame1.NavigationService.RemoveBackEntry();
+            // pageOformirovanie.ReloadData();
+        }
+        public void PageOformlenieClose()
+        {
+
+            Frame1.NavigationService.RemoveBackEntry();
+            // pageOformirovanie.ReloadData();
         }
 
         /// <summary>
@@ -115,7 +124,7 @@ namespace ApplicationUP
         /// <param name="e"></param>
         private void ExitToLogin(object sender, MouseButtonEventArgs e)
         {
-            window.Show();
+           
             Close();
         }
 
@@ -131,6 +140,12 @@ namespace ApplicationUP
         {
             Frame1.NavigationService.Navigate(pageListZakazAdmin);
             pageListZakazAdmin.ReloadData();
+        }
+
+        private void MenuGoToPageOpenUser(object sender, MouseButtonEventArgs e)
+        {
+            Frame1.NavigationService.Navigate(pageUser);
+           // pageUser.ReloadData();
         }
     }
 }

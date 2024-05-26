@@ -134,6 +134,9 @@
     <Compile Include="Pages\PageAddGoods.xaml.cs">
       <DependentUpon>PageAddGoods.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PageAutoresaziya.xaml.cs">
+      <DependentUpon>PageAutoresaziya.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PageListZakaz.xaml.cs">
       <DependentUpon>PageListZakaz.xaml</DependentUpon>
     </Compile>
@@ -143,11 +146,17 @@
     <Compile Include="Pages\PageOformirovanie.xaml.cs">
       <DependentUpon>PageOformirovanie.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PageRegistraziya.xaml.cs">
+      <DependentUpon>PageRegistraziya.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PageUpdateGoods.xaml.cs">
       <DependentUpon>PageUpdateGoods.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PageUpdateStatus.xaml.cs">
       <DependentUpon>PageUpdateStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageUser.xaml.cs">
+      <DependentUpon>PageUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PageWelcome.xaml.cs">
       <DependentUpon>PageWelcome.xaml</DependentUpon>
@@ -174,6 +183,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\PageAutoresaziya.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\PageListGoods.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,11 +203,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\PageRegistraziya.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\PageUpdateGoods.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\PageUpdateStatus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

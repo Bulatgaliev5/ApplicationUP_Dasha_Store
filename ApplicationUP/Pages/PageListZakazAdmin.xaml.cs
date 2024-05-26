@@ -66,7 +66,7 @@ namespace ApplicationUP.Pages
         {
             // Строка запроса
             string
-                sql = "SELECT * FROM zakazi";
+                sql = "SELECT * FROM заказы";
 
             // Объявление переменной на основе класс подключения:
             // >    Connector conn
@@ -141,7 +141,7 @@ namespace ApplicationUP.Pages
                 pageUpdateStatus.ShowDialog();
                 pageUpdateStatus.Focus();
                 this.Opacity = 1;
-
+               
             }
         }
     }

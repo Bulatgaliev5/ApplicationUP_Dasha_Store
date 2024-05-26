@@ -34,34 +34,15 @@
                 <TextBox x:Name="TextBoxAdressDostavki" Height="100"/>
 
 
-        
 
-        
+
+
                 <StackPanel Width="420" HorizontalAlignment="Center">
-                    <TextBlock  Text="Введите данные вашей банковской карты:" FontSize="16"  Margin="10"/>
-                    <Label Content="Введите номер карты"/>
-                    <xctk:MaskedTextBox x:Name="CardNumberTextBox"
-                             Mask="0000 0000 0000 0000" FontSize="20"
-                              />
-                    <!--<TextBox PreviewTextInput="Maskavvoda"  x:Name="CardNumberTextBox"   Margin="10"/>-->
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                        <StackPanel Margin="5" >
-                        <Label  Content="Введите срок действия карты"/>
-                            <xctk:MaskedTextBox x:Name="DateTextBox"
-                             Mask="00/00" FontSize="20"
+                    <Label Content="Введите номер документа"/>
+                    <xctk:MaskedTextBox x:Name="NumberDoc"
+                             Mask="0000000000" FontSize="20"
                               />
 
-                            
-                        </StackPanel>
-                        <StackPanel Margin="5" >
-                            <Label Content="Введите CVV код" />
-                            <xctk:MaskedTextBox x:Name="CVVTextBox"
-                             Mask="000" FontSize="20"
-                              />
-
-                        </StackPanel>
-                    </StackPanel>
-                   
                 </StackPanel>
                 <Border Style="{DynamicResource BorderBtn2}" MouseLeftButtonDown="btnzakazat">
                     <Label Content="Заказать" VerticalContentAlignment="Center" Foreground="#FF0092FF" Background="#FFF9F9F9" FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>

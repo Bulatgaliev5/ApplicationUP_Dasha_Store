@@ -236,30 +236,45 @@ namespace ApplicationUP.Pages
 
         public void plus(object sender, MouseButtonEventArgs e)
         {
-
-            if (sender is Border b && b.DataContext is Goods g)
+            if (sender is Border S )
             {
-                Label countLabel = b.FindName("CountLab") as Label;
-                if (g.count < g.CountInContainer) // проверка, чтобы count не стал отрицательным
+                TextBlock TextBlockCost = S.FindName("TextBlockCost") as TextBlock;
+                if (sender is Border b && b.DataContext is Goods g)
                 {
-                    g.count++;
-                    countLabel.Content = g.count;
+                    Label countLabel = b.FindName("CountLab") as Label;
+                   
+                    if (g.count < g.CountInContainer)
+                    {
+                        g.count++;
+
+                        g.Cost = g.Cost + g.Cost;
+                        countLabel.Content = g.count;
+                        TextBlockCost.Text = g.Cost.ToString();
+                    }
                 }
             }
+
         }
 
         public void minus(object sender, MouseButtonEventArgs e)
         {
 
-            if (sender is Border b && b.DataContext is Goods g)
+            if (sender is Border S)
             {
-                Label countLabel = b.FindName("CountLab") as Label;
-                if (g.count > 0) // проверка, чтобы count не стал отрицательным
+                TextBlock TextBlockCost = S.FindName("TextBlockCost") as TextBlock;
+                if (sender is Border b && b.DataContext is Goods g)
                 {
-                    g.count--;
-                    countLabel.Content = g.count;
-                }
+                    Label countLabel = b.FindName("CountLab") as Label;
 
+                    if (g.count < g.CountInContainer)
+                    {
+                        g.count--; ;
+
+                        g.Cost = g.Cost - g.Cost;
+                        countLabel.Content = g.count;
+                        TextBlockCost.Text = g.Cost.ToString();
+                    }
+                }
             }
         }
 

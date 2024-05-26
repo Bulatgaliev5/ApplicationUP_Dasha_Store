@@ -1,0 +1,43 @@
+﻿<Page x:Class="ApplicationUP.Pages.PageRegistraziya"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ApplicationUP.Pages"
+        mc:Ignorable="d" Height="570" 
+            xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="Регистрация" >
+    <Grid >
+        <ScrollViewer>
+
+            <StackPanel Margin="20">
+           
+                <Button HorizontalAlignment="Left"  Click="Nazad"  Content="Назад" Width="100" Margin="0"  Height="39" FontSize="20" FontFamily="Comic Sans MS" Background="#FF98C8EC" Foreground="White"/>
+                <TextBlock Text="Регистрация"   FontSize="36" Width="312" HorizontalAlignment="Center" Height="54"  FontFamily="Comic Sans MS" Foreground="#FF98C8EC" VerticalAlignment="Center" />
+                <Label  VerticalContentAlignment="Center"  Content="Пожалуйста введите данные для создания учетной записи"  Foreground="#FF6B6A6A" FontWeight="Bold" Height="107" FontSize="14" />
+            
+                <TextBlock Text="Напишите своё имя"  Foreground="#FF98C8EC" Height="53" RenderTransformOrigin="0.5,0.458"  FontFamily="Comic Sans MS" FontSize="22" HorizontalAlignment="Left" FontWeight="Bold"  />
+                <TextBox x:Name="nameTBox" Height="35" FontSize="20"/>
+
+                <TextBlock Text="Придумайте логин"  Height="43" Foreground="#FF98C8EC" FontFamily="Comic Sans MS" FontSize="22" FontWeight="Bold"/>
+                <TextBox x:Name="loginTBox" Height="35" FontSize="20"/>
+
+                <TextBlock Text="Придумайте пароль"  Height="43" Foreground="#FF98C8EC" FontFamily="Comic Sans MS" FontSize="22" FontWeight="Bold"/>
+                <PasswordBox x:Name="passTBox" Height="38" FontSize="20"/>
+
+
+                <TextBlock Text="Повторите пароль"  Height="43" Foreground="#FF98C8EC" FontFamily="Comic Sans MS" FontSize="22" FontWeight="Bold"/>
+                <PasswordBox x:Name="passcopyTBox" Height="38" FontSize="20"/>
+
+                <TextBlock Text="Напишите номер телефона"  Height="43" Foreground="#FF98C8EC" FontFamily="Comic Sans MS" FontSize="22" FontWeight="Bold"/>
+                <xctk:MaskedTextBox x:Name="numberTBox"
+                             Mask="+70000000000" FontSize="20"
+                              />
+
+
+                <Button Click="Registr" Content="Зарегистрироваться" Width="300" Margin="0,10,0,10"  Height="39" FontSize="20" FontFamily="Comic Sans MS" Background="#FF98C8EC" Foreground="White"/>
+        
+        </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

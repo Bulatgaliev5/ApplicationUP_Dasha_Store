@@ -3,6 +3,7 @@ using ApplicationUP.Template;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
@@ -26,11 +27,11 @@ namespace ApplicationUP.Pages
     /// </summary>
     public partial class PageOformirovanie : Page
     {
-        private int 
-            ID;
+        private int
+            ID_goods;
         MainWindow
             window;
-        decimal price_tovara, itogovaya_summa;
+        decimal price_tovara;
         int id_tovara;
         string image;
         string user_login;
@@ -38,7 +39,7 @@ namespace ApplicationUP.Pages
         public PageOformirovanie(MainWindow main, int ID_Item, string UserLogin, int count)
         {
             InitializeComponent();
-            ID = ID_Item;
+            ID_goods = ID_Item;
             window = main;
             user_login = UserLogin;
             Load();
@@ -48,6 +49,7 @@ namespace ApplicationUP.Pages
         private async void Load()
         {
             await LoadGoods();
+            await SQL_Upbate_V_nalichii(ID_goods);
         }
 
 
@@ -62,7 +64,7 @@ namespace ApplicationUP.Pages
             MySqlCommand
                 cmd = new MySqlCommand(sql, conn.GetConn());
 
-            cmd.Parameters.Add(new MySqlParameter("@id", ID));
+            cmd.Parameters.Add(new MySqlParameter("@id", ID_goods));
             await conn.GetOpen();
 
             MySqlDataReader
@@ -80,7 +82,7 @@ namespace ApplicationUP.Pages
                 InputName.Content = reader["name"].ToString();
                 countlabel.Content = Count;
                 id_tovara = Convert.ToInt32(reader["id_tovar"]);
-                InputCost.Content = reader["Cost"].ToString();
+               // InputCost.Content = reader["Cost"].ToString();
                 image = reader["Img"].ToString();
                 price_tovara = Convert.ToDecimal(reader["Cost"]);
 
@@ -106,9 +108,23 @@ namespace ApplicationUP.Pages
 
         public void Itog_Summa()
         {
-            itogovaya_summa = Count * price_tovara;
+            InputCost.Content = Count * price_tovara;
         }
+        public async Task<bool> SQL_Upbate_V_nalichii(int ID_goods)
+        {
+            Connector con = new Connector();
 
+            string sql = "Обновить_количество_в_наличии";
+            MySqlCommand cmd = new MySqlCommand(sql, con.GetConn());
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new MySqlParameter("@ID_goods", ID_goods));
+            cmd.Parameters.Add(new MySqlParameter("@quantity", Count));
+
+            await con.GetOpen();
+            await cmd.ExecuteNonQueryAsync();
+            await con.GetClose();
+            return true;
+        }
         private async Task<bool> zakazatSQL()
         {
             if (IsValidText(TextBoxAdressDostavki))
@@ -116,27 +132,17 @@ namespace ApplicationUP.Pages
                 TextBoxAdressDostavki.Focusable = true;
                 return false;
             }
-            else if (!CardNumberTextBox.IsMaskFull)
+            else if (!NumberDoc.IsMaskFull)
             {
-                CardNumberTextBox.Focusable = true;
-                return false;
-            }
-            else if (!CardNumberTextBox.IsMaskFull)
-            {
-                DateTextBox.Focusable = true;
-                return false;
-            }
-            else if (!CardNumberTextBox.IsMaskFull)
-            {
-                CVVTextBox.Focusable = true;
+                NumberDoc.Focusable = true;
                 return false;
             }
             DateTime date_zakaza = DateTime.Now;
             string
             sql =
-            "INSERT INTO zakazi " +
-            "(login_user, name_tovara, img_tavara, price_tovara, date_zakaza, id_tovara, adress_dostavki, count, number_card,itogovaya_summa,status) " +
-            "VALUES (@login_user, @name_tovara, @img_tavara, @price_tovara, @date_zakaza, @id_tovara, @adress_dostavki, @count, @number_card,@itogovaya_summa,@status)";
+            "INSERT INTO заказы " +
+            "(login_user, name_tovara, img_tavara, price_tovara, date_zakaza, id_tovara, adress_dostavki, count, number_documenta,itogovaya_summa,status) " +
+            "VALUES (@login_user, @name_tovara, @img_tavara, @price_tovara, @date_zakaza, @id_tovara, @adress_dostavki, @count, @number_documenta,@itogovaya_summa,@status)";
             Connector
             conn = new Connector();
             MySqlCommand
@@ -151,8 +157,8 @@ namespace ApplicationUP.Pages
             cmd.Parameters.Add(new MySqlParameter("@date_zakaza", date_zakaza));
             cmd.Parameters.Add(new MySqlParameter("@login_user", user_login));
             cmd.Parameters.Add(new MySqlParameter("@count", Count));
-            cmd.Parameters.Add(new MySqlParameter("@number_card", CardNumberTextBox.Text));
-            cmd.Parameters.Add(new MySqlParameter("@itogovaya_summa", itogovaya_summa));
+            cmd.Parameters.Add(new MySqlParameter("@number_documenta", NumberDoc.Text));
+            cmd.Parameters.Add(new MySqlParameter("@itogovaya_summa", InputCost.Content));
             cmd.Parameters.Add(new MySqlParameter("@status", status));
 
 
@@ -200,16 +206,15 @@ namespace ApplicationUP.Pages
 
             if (status)
             {
-
-                MessageBox.Show("заказ принят", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Заказ принят", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
                 window.GoToPageGoodsList();
             }
-
             else
-                MessageBox.Show("заказ не принят. Заполните все поля", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Заказ не принят. Заполните все поля", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            window.GoToPageOformlenie(ID, user_login, Count);
-            
+            window.PageOformlenieClose();
+
+
         }
     }
 }

@@ -27,7 +27,7 @@
             <ItemsControl x:Name="GoodsData">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel ItemWidth="240"/>
+                        <WrapPanel ItemWidth="250"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
@@ -46,29 +46,29 @@
                                     </UniformGrid>
                             
                                 </StackPanel>
-                                <StackPanel Margin="7.5,0">
+                                <StackPanel DataContext="{Binding }" Margin="7.5,0">
                                     <TextBlock Style="{DynamicResource GoodsName}" Text="{Binding Name}"/>
                                     <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding Desc}"/>
                                     <TextBlock  Text="{Binding CountInContainer,StringFormat='В наличии: {0} шт.'}"
                                         FontSize="15"        Margin="0,0,0,5"/>
                                     <TextBlock Style="{DynamicResource GoodsDiscount}" Text="Скидка"/>
                                     <TextBlock Style="{DynamicResource GoodsCostOld}" Text="{Binding Discount,StringFormat=' {0} рублей'}"/>
-                                    <TextBlock Style="{DynamicResource GoodsCostNew}" Text="{Binding Cost,StringFormat=' {0} рублей'}"/>
+                                    <TextBlock x:Name="TextBlockCost" Style="{DynamicResource GoodsCostNew}" Text="{Binding Cost,StringFormat=' {0} рублей'}"/>
                                 </StackPanel>
 
 
                                 <StackPanel Background="#FF98C8EC" Visibility="{Binding CanZakazVisible}" >
-                                    <UniformGrid  Columns="3" Margin="5" >
+                                    <UniformGrid DataContext="{Binding .}"  Columns="3" Margin="5" >
 
-                                        <Border x:Name="minus" MouseLeftButtonDown="minus" Background="#FF98C8EC" Padding="5" ToolTip="Редактирование данных" HorizontalAlignment="Left">
+                                        <Border x:Name="minus" MouseLeftButtonDown="minus" Background="#FF98C8EC" Padding="5" HorizontalAlignment="Left">
                                             <Image Style="{DynamicResource IconUser}" Source="/Icons/minus.png"/>
                                         </Border>
 
-                                        <Border x:Name="CountBorder"  DataContext="{Binding }" Background="#FF98C8EC" Padding="5" ToolTip="Удаление данных" HorizontalAlignment="Center">
+                                        <Border x:Name="CountBorder"   Background="#FF98C8EC" Padding="5" HorizontalAlignment="Center">
                                             <Label Content="{Binding count}"  x:Name="CountLab" />
                                         </Border>
 
-                                        <Border  x:Name="plus" MouseLeftButtonDown="plus" DataContext="{Binding }" Background="#FF98C8EC" Padding="5" ToolTip="Удаление данных" HorizontalAlignment="Right">
+                                        <Border  x:Name="plus" MouseLeftButtonDown="plus"  Background="#FF98C8EC" Padding="5"  HorizontalAlignment="Right">
                                             <Image Style="{DynamicResource IconUser}" Source="/Icons/plus.png"/>
                                         </Border>
                                     </UniformGrid>

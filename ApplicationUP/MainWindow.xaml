@@ -10,7 +10,7 @@
 >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="210px"/>
+            <ColumnDefinition Width="230px"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid Background="#FF98C8EC">
@@ -22,6 +22,14 @@
                 <StackPanel>
                     <StackPanel>
                         <Label Content="Магазин товаров" Style="{DynamicResource Title}" FontSize="21" Width="312"  Height="54"  FontFamily="Comic Sans MS" Foreground="Black" VerticalAlignment="Center" RenderTransformOrigin="0.58,0.538"/>
+                        <Border x:Name="ButtonOpenUser" Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageOpenUser" Background="#FFE1F3F9">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
+                                    <Image Source="/Icons/plus.png" Margin="5" Width="20"/>
+                                </StackPanel>
+                                <Label Content="Личный кабинет" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22"/>
+                            </StackPanel>
+                        </Border>
                         <Border x:Name="ButtonCreate" Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageAddGoods" Background="#FFE1F3F9">
                             <StackPanel Orientation="Horizontal">
                                 <StackPanel Style="{DynamicResource IconBack}" Background="#FFE1F3F9">

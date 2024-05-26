@@ -132,6 +132,7 @@ namespace ApplicationUP.Pages
                 else
                     MessageBox.Show("Статус заказа не обновлен", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
+
             }
             else
             {

@@ -67,7 +67,7 @@ namespace ApplicationUP.Pages
         {
             // Строка запроса
             string
-                sql = "SELECT * FROM zakazi where login_user=@login_user";
+                sql = "SELECT * FROM заказы where login_user=@login_user";
 
             // Объявление переменной на основе класс подключения:
             // >    Connector conn
