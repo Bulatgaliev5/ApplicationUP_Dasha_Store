@@ -39,11 +39,11 @@ namespace ApplicationUP
              pageUser;
 
 
-        public MainWindow( string name, int role_id, string role_name, string UserLogin)
+        public MainWindow(string name, int role_id, string role_name, string UserLogin)
         {
             InitializeComponent();
 
-            pageUser = new PageUser();
+            pageUser = new PageUser(this, UserLogin);
             pageGoods = new PageAddGoods(name, role_id, role_name);
             pageListGoods = new PageListGoods(this, name, role_id, role_name, UserLogin);
             pageListZakaz = new PageListZakaz(this, name, role_id, role_name, UserLogin);
@@ -65,6 +65,9 @@ namespace ApplicationUP
 
             LabelName.Text = name;
             LabelRole.Text = role_name;
+
+
+
         }
 
         /// <summary>
@@ -112,9 +115,15 @@ namespace ApplicationUP
         }
         public void PageOformlenieClose()
         {
-
             Frame1.NavigationService.RemoveBackEntry();
+
+
             // pageOformirovanie.ReloadData();
+        }
+
+        public void UpdateUser(string username)
+        {
+            LabelName.Text= username;
         }
 
         /// <summary>
@@ -145,7 +154,9 @@ namespace ApplicationUP
         private void MenuGoToPageOpenUser(object sender, MouseButtonEventArgs e)
         {
             Frame1.NavigationService.Navigate(pageUser);
-           // pageUser.ReloadData();
+            pageUser.ReloadData();
+
+
         }
     }
 }

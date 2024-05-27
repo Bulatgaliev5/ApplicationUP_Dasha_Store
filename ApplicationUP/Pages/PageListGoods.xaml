@@ -52,7 +52,7 @@
                                     <TextBlock  Text="{Binding CountInContainer,StringFormat='В наличии: {0} шт.'}"
                                         FontSize="15"        Margin="0,0,0,5"/>
                                     <TextBlock Style="{DynamicResource GoodsDiscount}" Text="Скидка"/>
-                                    <TextBlock Style="{DynamicResource GoodsCostOld}" Text="{Binding Discount,StringFormat=' {0} рублей'}"/>
+                                    <TextBlock x:Name="TextBlockDiscount"  Style="{DynamicResource GoodsCostOld}" Text="{Binding Discount,StringFormat=' {0} рублей'}"/>
                                     <TextBlock x:Name="TextBlockCost" Style="{DynamicResource GoodsCostNew}" Text="{Binding Cost,StringFormat=' {0} рублей'}"/>
                                 </StackPanel>
 
@@ -72,8 +72,8 @@
                                             <Image Style="{DynamicResource IconUser}" Source="/Icons/plus.png"/>
                                         </Border>
                                     </UniformGrid>
-                                    <Border MouseLeftButtonDown="addzakazat"  Margin="5"   Background="#FF98C8EC" ToolTip="Редактирование данных" >
-                                        <Label  Content="Заказать" FontFamily="Times New Roman" FontSize="20"/>
+                                    <Border MouseLeftButtonDown="addzakazat" Style="{DynamicResource BorderBtn2}" >
+                                        <Label HorizontalContentAlignment="Center"  Content="Заказать" FontFamily="Times New Roman" FontSize="20"/>
                                     </Border>
                                 </StackPanel>
                               

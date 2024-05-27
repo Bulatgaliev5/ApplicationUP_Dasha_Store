@@ -22,6 +22,8 @@ namespace ApplicationUP.Pages
         // Ининциализация коллекции на основе класса
         IList<Goods>
             goods = new List<Goods>();
+        IList<Goods>
+             goodsstart = new List<Goods>();
         MainWindow
             window;
         RoleGroup
@@ -126,12 +128,28 @@ namespace ApplicationUP.Pages
                     CanZakaz = TypeRoleGet(role),
                     CanZakazVisible = TypeRoleGet(role) ? Visibility.Collapsed : Visibility.Visible,
                     count = 1
-                }) ;
+                });
+
+                goodsstart.Add(new Goods()
+                {
+                    ID = Convert.ToInt32(reader["id_tovar"]),
+                    Name = reader["name"].ToString(),
+                    Desc = reader["Desc"].ToString(),
+                    Discount = Convert.ToInt32(reader["Discount"]),
+                    Cost = Convert.ToSingle(reader["Cost"]),
+                    CountInContainer = Convert.ToInt32(reader["V_nalichii"]),
+                    IMG = reader["Img"].ToString(),
+                    CanEdit = TypeRoleGet(role),
+                    CanVisible = TypeRoleGet(role) ? Visibility.Visible : Visibility.Collapsed,
+                    CanZakaz = TypeRoleGet(role),
+                    CanZakazVisible = TypeRoleGet(role) ? Visibility.Collapsed : Visibility.Visible,
+                    count = 1
+                });
 
                 // Обновление данных колекции
-               // GoodsData.Items.Refresh();
+                // GoodsData.Items.Refresh();
                 // Время ожидания (Время "Сна")
-                
+
             }
 
             // Асинхронное отключение от БД
@@ -236,9 +254,10 @@ namespace ApplicationUP.Pages
 
         public void plus(object sender, MouseButtonEventArgs e)
         {
-            if (sender is Border S )
+            if (sender is Border S)
             {
                 TextBlock TextBlockCost = S.FindName("TextBlockCost") as TextBlock;
+                TextBlock TextBlockDiscount = S.FindName("TextBlockDiscount") as TextBlock;
                 if (sender is Border b && b.DataContext is Goods g)
                 {
                     Label countLabel = b.FindName("CountLab") as Label;
@@ -246,9 +265,12 @@ namespace ApplicationUP.Pages
                     if (g.count < g.CountInContainer)
                     {
                         g.count++;
+                        Goods good = goodsstart.FirstOrDefault(gs => gs.ID == g.ID);
 
-                        g.Cost = g.Cost + g.Cost;
+                        g.Cost = good.Cost * g.count;
+                        g.Discount = good.Discount * g.count;
                         countLabel.Content = g.count;
+                        TextBlockDiscount.Text = g.Discount.ToString();
                         TextBlockCost.Text = g.Cost.ToString();
                     }
                 }
@@ -262,16 +284,21 @@ namespace ApplicationUP.Pages
             if (sender is Border S)
             {
                 TextBlock TextBlockCost = S.FindName("TextBlockCost") as TextBlock;
+                TextBlock TextBlockDiscount = S.FindName("TextBlockDiscount") as TextBlock;
                 if (sender is Border b && b.DataContext is Goods g)
                 {
                     Label countLabel = b.FindName("CountLab") as Label;
 
                     if (g.count < g.CountInContainer)
                     {
-                        g.count--; ;
+                        g.count--; 
 
-                        g.Cost = g.Cost - g.Cost;
+                        Goods good = goodsstart.FirstOrDefault(gs => gs.ID == g.ID);
+
+                        g.Cost = good.Cost * g.count;
+                        g.Discount = good.Discount * g.count;
                         countLabel.Content = g.count;
+                        TextBlockDiscount.Text = g.Discount.ToString();
                         TextBlockCost.Text = g.Cost.ToString();
                     }
                 }

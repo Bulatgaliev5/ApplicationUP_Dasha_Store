@@ -44,7 +44,7 @@
             <Setter Property="Margin" Value="0,0,0,7.5"/>
         </Style>
         <Style TargetType="Border" x:Key="BorderBtn">
-            <Setter Property="Background" Value="#CDA499"/>
+            <Setter Property="Background" Value="#FFE1F3F9"/>
             <Setter Property="BorderBrush" Value="#777"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Margin" Value="0,0,0,5"/>
@@ -53,7 +53,7 @@
             <Setter Property="Margin" Value="0,0,5,5"/>
         </Style>
         <Style TargetType="Border" x:Key="BorderBtn2" BasedOn="{StaticResource BorderBtn}">
-            <Setter Property="Background" Value="#E2B5A8"/>
+            <Setter Property="Background" Value="#FFE1F3F9"/>
             <Setter Property="Margin" Value="0,5,0,0"/>
         </Style>
         <Style TargetType="xctk:MaskedTextBox">

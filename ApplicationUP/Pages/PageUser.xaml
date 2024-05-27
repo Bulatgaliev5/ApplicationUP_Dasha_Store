@@ -19,22 +19,25 @@
         </StackPanel>
         <ScrollViewer Grid.Row="1">
             <StackPanel Margin="5">
-                <Label Content="Логин" FontFamily="Times New Roman" FontSize="20"/>
-                <TextBlock x:Name="InputLogin" />
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Логин:" FontFamily="Times New Roman" FontSize="20"/>
+                    <TextBlock  FontSize="20" Text="{Binding Login}" x:Name="InputLogin" />
+                    
+                </StackPanel>
                 <Label Content="Имя" FontFamily="Times New Roman" FontSize="20"/>
-                <TextBox x:Name="InputName" />
+                <TextBox Text="{Binding Name}" FontSize="20" x:Name="InputName" />
                 <Label Content="Номер телефона" FontFamily="Times New Roman" FontSize="20"/>
-                <xctk:MaskedTextBox x:Name="InputNumber_tel"
+                <xctk:MaskedTextBox Text="{Binding Numaber_tel}" x:Name="InputNumber_tel"
                              Mask="+70000000000" FontSize="20"
                               />
 
                     <UniformGrid Margin="30"  HorizontalAlignment="Stretch">
-                        
-                        <Border HorizontalAlignment="Left" Style="{DynamicResource BorderBtn2}" MouseLeftButtonDown="UpdateUser">
-                            <Label Content="Изменить" VerticalContentAlignment="Center" Foreground="#FF0092FF" Background="#FFF9F9F9" FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
+
+                    <Border Width="200" HorizontalAlignment="Left" Style="{DynamicResource BorderBtn2}" MouseLeftButtonDown="UpdateUser">
+                            <Label HorizontalContentAlignment="Center" Content="Изменить" VerticalContentAlignment="Center" Foreground="#FF0092FF" Background="#FFF9F9F9" FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
                         </Border>
-                        <Border HorizontalAlignment="Right" Style="{DynamicResource BorderBtn2}" MouseLeftButtonDown="Exit">
-                            <Label Content="Отмена" VerticalContentAlignment="Center" Background="#FFF7F7F7" Foreground="#FF0092FF" FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
+                        <Border Width="200" HorizontalAlignment="Right" Style="{DynamicResource BorderBtn2}" MouseLeftButtonDown="Exit">
+                        <Label HorizontalContentAlignment="Center" Content="Выход" VerticalContentAlignment="Center" Background="#FFF7F7F7" Foreground="#FF0092FF" FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
                         </Border>
                     </UniformGrid>
 

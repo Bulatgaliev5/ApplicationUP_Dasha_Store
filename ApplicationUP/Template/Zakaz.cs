@@ -15,7 +15,12 @@ namespace ApplicationUP.Template
             get => _count;
             set => _count = value;
         }
-
+        private string _number_documenta;
+        public string number_documenta
+        {   
+            get => _number_documenta;
+            set => _number_documenta = value;
+        }
         private int _id_zakaza;
         public int id_zakaza
         {

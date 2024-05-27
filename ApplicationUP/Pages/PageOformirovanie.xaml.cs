@@ -1,24 +1,18 @@
 ﻿using ApplicationUP.Core;
-using ApplicationUP.Template;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics.Metrics;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Xceed.Wpf.AvalonDock.Themes;
+using Dadata;
+using Dadata.Model;
+
 
 namespace ApplicationUP.Pages
 {
@@ -36,6 +30,8 @@ namespace ApplicationUP.Pages
         string image;
         string user_login;
         int Count;
+        SuggestResponse<Address> result;
+        bool ValidBool = false;
         public PageOformirovanie(MainWindow main, int ID_Item, string UserLogin, int count)
         {
             InitializeComponent();
@@ -127,10 +123,12 @@ namespace ApplicationUP.Pages
         }
         private async Task<bool> zakazatSQL()
         {
-            if (IsValidText(TextBoxAdressDostavki))
+            if (!ValidBool)
             {
                 TextBoxAdressDostavki.Focusable = true;
+                MessageBox.Show("Введите полный адрес доставки до ввода номера квартиры", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                 return false;
+
             }
             else if (!NumberDoc.IsMaskFull)
             {
@@ -142,7 +140,7 @@ namespace ApplicationUP.Pages
             sql =
             "INSERT INTO заказы " +
             "(login_user, name_tovara, img_tavara, price_tovara, date_zakaza, id_tovara, adress_dostavki, count, number_documenta,itogovaya_summa,status) " +
-            "VALUES (@login_user, @name_tovara, @img_tavara, @price_tovara, @date_zakaza, @id_tovara, @adress_dostavki, @count, @number_documenta,@itogovaya_summa,@status)";
+            "VALUES (@login_user, @name_tovara, @img_tavara, @price_tovara, @date_zakaza, @id_tovara, @adress_dostavki, @count, @number_documenta, @itogovaya_summa,@status)";
             Connector
             conn = new Connector();
             MySqlCommand
@@ -214,6 +212,42 @@ namespace ApplicationUP.Pages
 
             window.PageOformlenieClose();
 
+
+        }
+
+        private async void AdressDostavkiTexBox(object sender, TextChangedEventArgs e)
+        {
+            // https://github.com/hflabs/dadata-csharp
+
+            var token = "4239ba9c988dc2e63b97b3dbe2bbd403fe277ec5";
+            var api = new SuggestClientAsync(token);
+            result = await api.SuggestAddress(TextBoxAdressDostavki.Text);
+
+            IList<string> addresses = new List<string>();
+            for (int i = 0; i < result.suggestions.Count; i++)
+            {
+
+                addresses.Add(result.suggestions[i].value);
+            }
+
+            addressDataList.ItemsSource = addresses.ToList();
+        }
+
+        private void SelectionChangedaddressDataList(object sender, SelectionChangedEventArgs e)
+        {
+            if (addressDataList.SelectedItem != null)
+            {
+                var selectedAddress = result.suggestions.FirstOrDefault(s => s.value == addressDataList.SelectedValue.ToString());
+                TextBoxAdressDostavki.Text = selectedAddress.value;
+                if (selectedAddress != null && !string.IsNullOrEmpty(selectedAddress.data.flat))
+                {
+                    ValidBool = true;
+                }
+                else
+                {
+                    ValidBool = false;
+                }
+            }
 
         }
     }

@@ -115,6 +115,7 @@ namespace ApplicationUP.Pages
                     count = Convert.ToInt32(reader["count"]),
                     status = Convert.ToString(reader["status"]),
                     itogovaya_summa = Convert.ToSingle(reader["itogovaya_summa"]),
+                    number_documenta = Convert.ToString(reader["number_documenta"]),
 
                 });
 
@@ -139,6 +140,7 @@ namespace ApplicationUP.Pages
                 PageUpdateStatus pageUpdateStatus = new PageUpdateStatus(g.id_zakaza);
                 this.Opacity = 0.5;
                 pageUpdateStatus.ShowDialog();
+                Load();
                 pageUpdateStatus.Focus();
                 this.Opacity = 1;
                

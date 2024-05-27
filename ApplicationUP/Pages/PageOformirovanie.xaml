@@ -29,17 +29,20 @@
                 <Label Content="Картинка" FontFamily="Times New Roman" FontSize="20"/>
                 <Image x:Name="ImageImg" Width="200"/>
                 <Label Content="Количество" FontFamily="Times New Roman" FontSize="20"/>
-                <Label x:Name="countlabel" Height="100"/>
+                <Label x:Name="countlabel" />
                 <Label Content="Введите адресс доставки" FontFamily="Times New Roman" FontSize="20"/>
-                <TextBox x:Name="TextBoxAdressDostavki" Height="100"/>
+                <TextBox Margin="5" TextChanged="AdressDostavkiTexBox" x:Name="TextBoxAdressDostavki" Height="20"/>
+                <ListView Margin="5" Height="100" SelectionChanged="SelectionChangedaddressDataList"
+                           x:Name="addressDataList" >
+
+                </ListView>
 
 
 
 
-
-                <StackPanel Width="420" HorizontalAlignment="Center">
-                    <Label Content="Введите номер документа"/>
-                    <xctk:MaskedTextBox x:Name="NumberDoc"
+                <StackPanel Margin="5" HorizontalAlignment="Center">
+                    <Label Content="Введите номер документа" FontSize="20"/>
+                    <xctk:MaskedTextBox x:Name="NumberDoc" HorizontalContentAlignment="Center"
                              Mask="0000000000" FontSize="20"
                               />
 

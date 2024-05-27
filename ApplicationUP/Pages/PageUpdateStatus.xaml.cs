@@ -105,7 +105,7 @@ namespace ApplicationUP.Pages
 
             Connector con = new Connector();
             string
-                  sql = "UPDATE zakazi SET `status`=@status WHERE `id_zakaza`=@id_zakaza";
+                  sql = "UPDATE заказы SET `status`=@status WHERE `id_zakaza`=@id_zakaza";
 
 
 

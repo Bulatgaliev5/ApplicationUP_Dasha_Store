@@ -31,14 +31,18 @@
 
                                 <StackPanel Margin="7.5,0">
                                     <TextBlock Style="{DynamicResource GoodsName}" Text="{Binding name_tovara}"/>
-                                    <TextBlock   Style="{DynamicResource GoodsDesc}" Text="{Binding price_tovara,StringFormat=Цена: {0}}"/>
-                                    <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding count,StringFormat=Количество: {0}}"/>
-                                    <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding itogovaya_summa,StringFormat=Сумма заказа: {0}}"/>
-                                    <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding date,StringFormat=dd.MM.yyyy}"/>
-                                    <TextBlock TextWrapping="Wrap"  Style="{DynamicResource GoodsCostNew}" Text="{Binding status,StringFormat=Статус заказа: {0}}"/>
+                                    <TextBlock   Style="{DynamicResource GoodsDesc}" Text="{Binding price_tovara,StringFormat=Цена: {0} рублей}"/>
+                                    <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding count,StringFormat=Количество: {0} шт.}"/>
+                                    <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding itogovaya_summa,StringFormat=Сумма заказа: {0} рублей}"/>
+                                    <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding date,StringFormat=Дата заказа dd.MM.yyyy}"/>
+                                    <StackPanel VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" Orientation="Horizontal">
+                                        <TextBlock FontSize="15" VerticalAlignment="Center"  Style="{DynamicResource GoodsDesc}" Text="№ документа:"/>
+                                        <TextBox IsReadOnly="True" Padding="5" Margin="5,0,0,0" FontSize="15" Text="{Binding number_documenta}"/>
+                                    </StackPanel>
+                                    <TextBlock TextWrapping="Wrap"  Style="{DynamicResource GoodsCostNew}" Text="{Binding status,StringFormat=Статус: {0}}"/>
                                 </StackPanel>
-                                <Border MouseLeftButtonDown="UpdateStatus" BorderBrush="Black" BorderThickness="1"  Margin="5"   Background="#FF98C8EC" ToolTip="Редактирование данных" >
-                                    <Label  Content="Изменить статус заказа" FontFamily="Times New Roman" FontSize="20"/>
+                                <Border Style="{DynamicResource BorderBtn2}" MouseLeftButtonDown="UpdateStatus"  >
+                                    <Label  HorizontalContentAlignment="Center" Content="Изменить статус заказа" FontFamily="Times New Roman" FontSize="20"/>
                                 </Border>
                             </StackPanel>
                             
