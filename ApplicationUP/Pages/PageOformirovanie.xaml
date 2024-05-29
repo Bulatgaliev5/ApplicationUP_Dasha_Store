@@ -38,7 +38,7 @@
                 </ListView>
 
 
-
+                <TextBlock Margin="5" TextWrapping="Wrap" Text="Необходимо перевести на номер 89174563423, после перевода денежных средств необходим вписать номер документа в поле ниже" FontSize="20"/>
 
                 <StackPanel Margin="5" HorizontalAlignment="Center">
                     <Label Content="Введите номер документа" FontSize="20"/>

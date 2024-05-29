@@ -161,6 +161,9 @@
     <Compile Include="Pages\PageUpdateStatus.xaml.cs">
       <DependentUpon>PageUpdateStatus.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PageKartochaGoods.xaml.cs">
+      <DependentUpon>PageKartochaGoods.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PageUser.xaml.cs">
       <DependentUpon>PageUser.xaml</DependentUpon>
     </Compile>
@@ -221,6 +224,10 @@
     <Page Include="Pages\PageUpdateStatus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageKartochaGoods.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\PageUser.xaml">
       <SubType>Designer</SubType>
@@ -293,6 +300,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\logo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\kab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Exit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

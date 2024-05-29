@@ -20,7 +20,7 @@
             <ItemsControl x:Name="zakazlistData">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel ItemWidth="240"/>
+                        <WrapPanel ItemWidth="250"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
@@ -35,6 +35,8 @@
                                     <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding count,StringFormat=Количество: {0} шт.}"/>
                                     <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding itogovaya_summa,StringFormat=Сумма заказа: {0} рублей}"/>
                                     <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding date,StringFormat=Дата заказа dd.MM.yyyy}"/>
+                                    <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding adress_dostavki,StringFormat=Адрес доставки: {0}}"/>
+                                    <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding nameuser,StringFormat=Имя покупателя: {0}}"/>
                                     <StackPanel VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" Orientation="Horizontal">
                                         <TextBlock FontSize="15" VerticalAlignment="Center"  Style="{DynamicResource GoodsDesc}" Text="№ документа:"/>
                                         <TextBox IsReadOnly="True" Padding="5" Margin="5,0,0,0" FontSize="15" Text="{Binding number_documenta}"/>

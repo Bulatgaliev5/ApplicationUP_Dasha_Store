@@ -17,9 +17,21 @@ namespace ApplicationUP.Template
         }
         private string _number_documenta;
         public string number_documenta
-        {   
+        {
             get => _number_documenta;
             set => _number_documenta = value;
+        }
+        private string _adress_dostavki;
+        public string adress_dostavki
+        {
+            get => _adress_dostavki;
+            set => _adress_dostavki = value;
+        }
+        private string _nameuser;
+        public string nameuser
+        {
+            get => _nameuser;
+            set => _nameuser = value;
         }
         private int _id_zakaza;
         public int id_zakaza

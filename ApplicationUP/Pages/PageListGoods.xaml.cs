@@ -28,9 +28,10 @@ namespace ApplicationUP.Pages
             window;
         RoleGroup
             role;
-        string
+        private string
             Loginuser;
-      
+        PageKartochaGoods pageKartocha;
+
 
 
         // Конструктор
@@ -270,8 +271,8 @@ namespace ApplicationUP.Pages
                         g.Cost = good.Cost * g.count;
                         g.Discount = good.Discount * g.count;
                         countLabel.Content = g.count;
-                        TextBlockDiscount.Text = g.Discount.ToString();
-                        TextBlockCost.Text = g.Cost.ToString();
+                        TextBlockDiscount.Text = string.Format(g.Discount.ToString() + " рублей");
+                        TextBlockCost.Text = string.Format(g.Cost.ToString()+ " рублей");
                     }
                 }
             }
@@ -298,8 +299,8 @@ namespace ApplicationUP.Pages
                         g.Cost = good.Cost * g.count;
                         g.Discount = good.Discount * g.count;
                         countLabel.Content = g.count;
-                        TextBlockDiscount.Text = g.Discount.ToString();
-                        TextBlockCost.Text = g.Cost.ToString();
+                        TextBlockDiscount.Text = string.Format(g.Discount.ToString() + " рублей");
+                        TextBlockCost.Text = string.Format(g.Cost.ToString() + " рублей");
                     }
                 }
             }
@@ -336,6 +337,16 @@ namespace ApplicationUP.Pages
             var result = goods.Where(a => a.Name.ToLower().StartsWith(tb1.Text.ToLower()));
             GoodsData.ItemsSource = null;
             GoodsData.ItemsSource = result;
+        }
+
+        private void openkartochagoods(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border b && b.DataContext is Goods g)
+            {
+                pageKartocha = new PageKartochaGoods(window, g.ID, Loginuser,g.count);
+                NavigationService.Navigate(pageKartocha);
+            }
+
         }
     }
 }

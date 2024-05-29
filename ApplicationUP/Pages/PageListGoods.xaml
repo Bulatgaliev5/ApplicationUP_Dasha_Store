@@ -49,6 +49,7 @@
                                 <StackPanel DataContext="{Binding }" Margin="7.5,0">
                                     <TextBlock Style="{DynamicResource GoodsName}" Text="{Binding Name}"/>
                                     <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding Desc}"/>
+
                                     <TextBlock  Text="{Binding CountInContainer,StringFormat='В наличии: {0} шт.'}"
                                         FontSize="15"        Margin="0,0,0,5"/>
                                     <TextBlock Style="{DynamicResource GoodsDiscount}" Text="Скидка"/>
@@ -72,9 +73,13 @@
                                             <Image Style="{DynamicResource IconUser}" Source="/Icons/plus.png"/>
                                         </Border>
                                     </UniformGrid>
+                                    <Border MouseLeftButtonDown="openkartochagoods"  Style="{DynamicResource BorderBtn2}" >
+                                        <Label HorizontalContentAlignment="Center"  Content="Подробнее" FontFamily="Times New Roman" FontSize="20"/>
+                                    </Border>
                                     <Border MouseLeftButtonDown="addzakazat" Style="{DynamicResource BorderBtn2}" >
                                         <Label HorizontalContentAlignment="Center"  Content="Заказать" FontFamily="Times New Roman" FontSize="20"/>
                                     </Border>
+
                                 </StackPanel>
                               
                             </StackPanel>

@@ -66,7 +66,8 @@ namespace ApplicationUP.Pages
         {
             // Строка запроса
             string
-                sql = "SELECT * FROM заказы";
+                sql = "SELECT * FROM заказы з " +
+                "JOIN пользователи п ON п.login = з.login_user";
 
             // Объявление переменной на основе класс подключения:
             // >    Connector conn
@@ -116,6 +117,8 @@ namespace ApplicationUP.Pages
                     status = Convert.ToString(reader["status"]),
                     itogovaya_summa = Convert.ToSingle(reader["itogovaya_summa"]),
                     number_documenta = Convert.ToString(reader["number_documenta"]),
+                    adress_dostavki = Convert.ToString(reader["adress_dostavki"]),
+                    nameuser = Convert.ToString(reader["name"]),
 
                 });
 

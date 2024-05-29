@@ -59,7 +59,7 @@
         <Style TargetType="xctk:MaskedTextBox">
             <Setter Property="Height" Value="30"/>
         </Style>
-        
+
         
     </Application.Resources>
 </Application>

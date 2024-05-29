@@ -55,11 +55,13 @@ namespace ApplicationUP
                     ButtonCreate.Visibility = Visibility.Visible;
                     BtnKorzina.Visibility = Visibility.Collapsed;
                     BtnZakazAdmin.Visibility = Visibility.Visible;
+                    BtnListUser.Visibility = Visibility.Visible;
                     break;
                 default:
                     ButtonCreate.Visibility = Visibility.Collapsed;
                     BtnKorzina.Visibility = Visibility.Visible;
                     BtnZakazAdmin.Visibility = Visibility.Collapsed;
+                    BtnListUser.Visibility = Visibility.Collapsed;
                     break;
             }
 
@@ -156,6 +158,11 @@ namespace ApplicationUP
             Frame1.NavigationService.Navigate(pageUser);
             pageUser.ReloadData();
 
+
+        }
+
+        private void MenuGoToPageListUser(object sender, MouseButtonEventArgs e)
+        {
 
         }
     }

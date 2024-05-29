@@ -20,7 +20,7 @@
             <ItemsControl x:Name="zakazlistData">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel ItemWidth="240"/>
+                        <WrapPanel ItemWidth="250"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>

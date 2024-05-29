@@ -1,0 +1,73 @@
+﻿<Page x:Class="ApplicationUP.Pages.PageKartochaGoods"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicationUP.Pages"
+      mc:Ignorable="d" 
+
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      Title="PageUser">
+
+    <Grid Margin="15" Background="#FF98C8EC">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+       
+            <Grid Margin="15" HorizontalAlignment="Stretch">
+
+                <Border HorizontalAlignment="Left"  x:Name="ButtonExit" Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageExit" Background="#FFE1F3F9">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel VerticalAlignment="Center" Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
+                        <Image Source="/Image/Exit.png" Margin="5" Width="20"/>
+                    </StackPanel>
+                    <Label Content="Назад" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22"/>
+                </StackPanel>
+            </Border>
+            <Label HorizontalAlignment="Center" Content="Карточка товара" Style="{DynamicResource Title}" FontFamily="Times New Roman" FontSize="36" Foreground="White" HorizontalContentAlignment="Center"/>
+    
+        </Grid>
+
+        <ScrollViewer Grid.Row="1">
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Margin="15"  Grid.Column="0">
+                    <Image Margin="0" Width="400" x:Name="InputImg" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="15" >
+                    <Label Content="Название" FontFamily="Times New Roman" FontSize="20"/>
+                    <TextBlock x:Name="InputName" />
+                    <Label Content="Описание" FontFamily="Times New Roman" FontSize="20"/>
+                    <TextBlock TextWrapping="Wrap" x:Name="InputDesc" />
+                    <Label Content="Цена" FontFamily="Times New Roman" FontSize="20"/>
+                    <TextBlock x:Name="InputCost"  PreviewTextInput="IsValueNumberChech"/>
+                    <Label Content="Скидка" FontFamily="Times New Roman" FontSize="20"/>
+                    <TextBlock x:Name="InputDiscount" PreviewTextInput="IsValueNumberChech"/>
+                    <Label Content="Количество" FontFamily="Times New Roman" FontSize="20"/>
+                    <TextBlock x:Name="InputQantity" />
+                    <Label Content="В наличии" PreviewTextInput="IsValueNumberChech" FontFamily="Times New Roman" FontSize="20"/>
+                    <TextBlock x:Name="InputCount" />
+                    <Label Content="Материал" FontFamily="Times New Roman" FontSize="20"/>
+                    <TextBlock TextWrapping="Wrap" x:Name="InputMaterial" />
+                    <Label Content="Качество" FontFamily="Times New Roman" FontSize="20"/>
+                    <TextBlock TextWrapping="Wrap" x:Name="InputKachestvo" />
+
+
+                        <Border  HorizontalAlignment="Center" MouseLeftButtonDown="addzakazat" Style="{DynamicResource BorderBtn2}" >
+                            <Label Margin="5" HorizontalContentAlignment="Center"  Content="Заказать" FontFamily="Times New Roman" FontSize="20"/>
+                        </Border>
+
+                </StackPanel>
+                
+            </Grid>
+
+        </ScrollViewer>
+
+    </Grid>
+</Page>
