@@ -55,11 +55,48 @@
         <Style TargetType="Border" x:Key="BorderBtn2" BasedOn="{StaticResource BorderBtn}">
             <Setter Property="Background" Value="#FFE1F3F9"/>
             <Setter Property="Margin" Value="0,5,0,0"/>
+
         </Style>
         <Style TargetType="xctk:MaskedTextBox">
             <Setter Property="Height" Value="30"/>
         </Style>
-
         
+        <Style TargetType="Border" x:Key="BorderButton">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderBrush" Value="#777"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="#FFE1F3F9"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Background" Value="Snow" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Border" x:Key="BorderButtonBlock">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderBrush" Value="#777"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="#FF98C8EC"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Background" Value="#FFE1F3F9" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="StackPanel" x:Key="StackPanelButton">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="#FFE1F3F9"/>
+        </Style>
+        <Style TargetType="StackPanel" x:Key="StackPanelBorber">
+            <Setter Property="Background" Value="#FFE1F3F9"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="TextBlockUserZakaz">
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
     </Application.Resources>
 </Application>

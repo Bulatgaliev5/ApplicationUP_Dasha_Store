@@ -31,11 +31,11 @@
                 <Label Content="В наличии" PreviewTextInput="IsValueNumberChech" FontFamily="Times New Roman" FontSize="20"/>
                 <TextBox x:Name="InputCount" />
 
-                <Border Style="{DynamicResource BorderBtn2}" MouseLeftButtonDown="UpdateGoods">
-                    <Label Content="Изменить" VerticalContentAlignment="Center" Foreground="#FF0092FF" Background="#FFF9F9F9" FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
+                <Border Style="{DynamicResource BorderButton}" MouseLeftButtonDown="UpdateGoods">
+                    <Label Content="Изменить" VerticalContentAlignment="Center"  FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
                 </Border>
-                <Border Style="{DynamicResource BorderBtn2}" MouseLeftButtonDown="CanselPage">
-                    <Label Content="Отмена" VerticalContentAlignment="Center" Background="#FFF7F7F7" Foreground="#FF0092FF" FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
+                <Border Style="{DynamicResource BorderButton}" MouseLeftButtonDown="CanselPage">
+                    <Label Content="Отмена" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
                 </Border>
             </StackPanel>
         </ScrollViewer>

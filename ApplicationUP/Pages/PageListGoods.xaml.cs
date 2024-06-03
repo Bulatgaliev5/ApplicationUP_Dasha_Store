@@ -77,7 +77,7 @@ namespace ApplicationUP.Pages
                 conn = new Connector();
             // Строка запроса
             string
-                sql = "ПолучитьТоварыВНаличии";
+                sql = "ПолучиитьВсеТоварыВНаличииИКоличествоОтзывов";
 
             // Объявление переменной на основе класс подключения:
             // >    Connector conn
@@ -128,7 +128,9 @@ namespace ApplicationUP.Pages
                     CanVisible = TypeRoleGet(role) ? Visibility.Visible : Visibility.Collapsed,
                     CanZakaz = TypeRoleGet(role),
                     CanZakazVisible = TypeRoleGet(role) ? Visibility.Collapsed : Visibility.Visible,
-                    count = 1
+                    count = 1,
+                    rating = Convert.ToSingle(reader["Rating"]),
+                    reviews_count = Convert.ToInt32(reader["reviews_count"]),
                 });
 
                 goodsstart.Add(new Goods()
@@ -144,7 +146,9 @@ namespace ApplicationUP.Pages
                     CanVisible = TypeRoleGet(role) ? Visibility.Visible : Visibility.Collapsed,
                     CanZakaz = TypeRoleGet(role),
                     CanZakazVisible = TypeRoleGet(role) ? Visibility.Collapsed : Visibility.Visible,
-                    count = 1
+                    count = 1,
+                    rating = Convert.ToSingle(reader["Rating"]),
+                    reviews_count = Convert.ToInt32(reader["reviews_count"]),
                 });
 
                 // Обновление данных колекции
@@ -343,7 +347,7 @@ namespace ApplicationUP.Pages
         {
             if (sender is Border b && b.DataContext is Goods g)
             {
-                pageKartocha = new PageKartochaGoods(window, g.ID, Loginuser,g.count);
+                pageKartocha = new PageKartochaGoods(window, g.ID, Loginuser,g.count, g.rating, g.reviews_count);
                 NavigationService.Navigate(pageKartocha);
             }
 

@@ -25,11 +25,17 @@ namespace ApplicationUP.Template
         private string _numaber_tel;
         private int _role_id;
         private string _name;
+        private int _id_user;
 
         public int Role_id
         {
             get => _role_id;
             set => _role_id = value;
+        }
+        public int id_user
+        {
+            get => _id_user;
+            set => _id_user = value;
         }
 
         public string Name

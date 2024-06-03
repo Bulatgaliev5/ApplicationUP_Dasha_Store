@@ -10,8 +10,8 @@
 >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="230px"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid Background="#FF98C8EC">
             <Grid Margin="15">
@@ -26,43 +26,43 @@
                             <Image  Width="50" Source="Image/logo.jpg"/>
                             <Label Margin="55,0,0,0" Content="Текстиль" Style="{DynamicResource Title}" FontSize="21" />
                         </StackPanel>
-                        <Border x:Name="ButtonOpenUser" Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageOpenUser" Background="#FFE1F3F9">
+                        <Border x:Name="ButtonOpenUser" Style="{DynamicResource BorderButton}" MouseLeftButtonDown="MenuGoToPageOpenUser" >
                             <StackPanel Orientation="Horizontal">
-                                <StackPanel Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
+                                <StackPanel Style="{DynamicResource StackPanelButton}" >
                                     <Image Source="/Icons/kab.png" Margin="5" Width="20"/>
                                 </StackPanel>
                                 <Label Content="Личный кабинет" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22"/>
                             </StackPanel>
                         </Border>
-                        <Border x:Name="ButtonCreate" Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageAddGoods" Background="#FFE1F3F9">
+                        <Border x:Name="ButtonCreate" Style="{DynamicResource BorderButton}" MouseLeftButtonDown="MenuGoToPageAddGoods" >
                             <StackPanel Orientation="Horizontal">
-                                <StackPanel Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
+                                <StackPanel Style="{DynamicResource StackPanelButton}" >
                                     <Image Source="/Icons/plus.png" Margin="5" Width="20"/>
                                 </StackPanel>
                                 <Label Content="Новый товар" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22"/>
                             </StackPanel>
                         </Border>
-                        <Border Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageListGoods" Background="#FFE1F3F9">
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
+                        <Border Style="{DynamicResource BorderButton}" MouseLeftButtonDown="MenuGoToPageListGoods" >
+                            <StackPanel Orientation="Horizontal" >
+                                <StackPanel Style="{DynamicResource StackPanelButton}" >
                                     <Image Source="/Icons/tovar.png" Margin="5" Width="20"/>
                                 </StackPanel>
                                 <Label Content="Товары" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
-                        <Border x:Name="BtnKorzina" Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageListKorzina" Background="#FFE1F3F9">
+                        <Border x:Name="BtnKorzina" Style="{DynamicResource BorderButton}" MouseLeftButtonDown="MenuGoToPageListKorzina" >
                             <StackPanel Orientation="Horizontal">
-                                <StackPanel Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
+                                <StackPanel Style="{DynamicResource StackPanelButton}" >
                                     <Image Source="/Icons/korzina.png" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20"/>
                                 </StackPanel>
                                 <Label Content="Мои заказы" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
-                        <Border x:Name="BtnZakazAdmin" Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageListZakazAdmin" Background="#FFE1F3F9">
+                        <Border x:Name="BtnZakazAdmin" Style="{DynamicResource BorderButton}"  MouseLeftButtonDown="MenuGoToPageListZakazAdmin" >
                             <StackPanel Orientation="Horizontal">
-                                <StackPanel Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
+                                <StackPanel Style="{DynamicResource StackPanelButton}" >
                                     <Image Source="/Icons/korzina.png" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20"/>
                                 </StackPanel>
                                 <Label Content="Заказы" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -70,9 +70,9 @@
                         </Border>
 
 
-                        <Border x:Name="BtnListUser" Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageListUser" Background="#FFE1F3F9">
+                        <Border x:Name="BtnListUser" Style="{DynamicResource BorderButton}" MouseLeftButtonDown="MenuGoToPageListUser" >
                             <StackPanel Orientation="Horizontal">
-                                <StackPanel Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
+                                <StackPanel Style="{DynamicResource StackPanelButton}" >
                                     <Image Source="/Icons/korzina.png" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20"/>
                                 </StackPanel>
                                 <Label Content="Пользователи" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -84,7 +84,7 @@
                 <StackPanel Grid.Row="1">
                     <TextBlock Name="LabelName" Text="Здраствуйте, Имя" FontFamily="Times New Roman" FontSize="20"/>
                     <TextBlock Name="LabelRole" Text="(пользователь)" FontFamily="Times New Roman" FontSize="20"/>
-                    <Border Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="ExitToLogin" Background="#FFE1F3F9">
+                    <Border Style="{DynamicResource BorderButton}" MouseLeftButtonDown="ExitToLogin" >
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Выход" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="25"/>
                         </StackPanel>

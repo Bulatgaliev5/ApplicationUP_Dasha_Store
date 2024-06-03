@@ -13,11 +13,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+          
         </Grid.RowDefinitions>
        
             <Grid Margin="15" HorizontalAlignment="Stretch">
 
-                <Border HorizontalAlignment="Left"  x:Name="ButtonExit" Style="{DynamicResource BorderBtn}" MouseLeftButtonDown="MenuGoToPageExit" Background="#FFE1F3F9">
+            <Border HorizontalAlignment="Left"  x:Name="ButtonExit" Style="{DynamicResource BorderButton}" MouseLeftButtonDown="MenuGoToPageExit" Background="#FFE1F3F9">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel VerticalAlignment="Center" Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
                         <Image Source="/Image/Exit.png" Margin="5" Width="20"/>
@@ -35,7 +36,11 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
 
+                </Grid.RowDefinitions>
                 <StackPanel Margin="15"  Grid.Column="0">
                     <Image Margin="0" Width="400" x:Name="InputImg" />
                 </StackPanel>
@@ -58,13 +63,56 @@
                     <Label Content="Качество" FontFamily="Times New Roman" FontSize="20"/>
                     <TextBlock TextWrapping="Wrap" x:Name="InputKachestvo" />
 
-
-                        <Border  HorizontalAlignment="Center" MouseLeftButtonDown="addzakazat" Style="{DynamicResource BorderBtn2}" >
+                    <StackPanel Orientation="Horizontal">
+                        <Border Margin="5,50,5,5"  HorizontalAlignment="Center" MouseLeftButtonDown="addzakazat" Style="{DynamicResource BorderButton}" >
                             <Label Margin="5" HorizontalContentAlignment="Center"  Content="Заказать" FontFamily="Times New Roman" FontSize="20"/>
                         </Border>
 
+                    </StackPanel>
+
+
+                   
                 </StackPanel>
-                
+
+
+                <StackPanel Grid.ColumnSpan="2" Grid.Row="1">
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                        <Label Margin="15" Content="Отзывы пользователей" FontWeight="Bold" FontSize="20" Foreground="#555" VerticalAlignment="Center"/>
+                        <Image Width="30"  Source="/Icons/reting.png"/>
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,15,0" x:Name="TextBlockRating" FontSize="15" />
+                        <TextBlock VerticalAlignment="Center" x:Name="TextBlockReviews_count" FontSize="15" />
+                    </StackPanel>
+                    <StackPanel Margin="15,0,15,0"  Height="1" Background="Black"/>
+                    <StackPanel x:Name="NoReviews">
+                        <TextBlock Margin="15" HorizontalAlignment="Center" 
+                                   FontSize="20" Text="Нету ни одного отзыва на данный товар"/>
+                    </StackPanel>
+                    <ItemsControl  x:Name="ReviewsData">
+                    <ItemsControl.ItemTemplate>
+                        <ItemContainerTemplate>
+                            <Border Margin="15"  Background="#FFE1F3F9">
+                                    <StackPanel   Margin="5">
+                                        <StackPanel Margin="5" Orientation="Horizontal">
+                                        <Image  Margin="5" Width="50" Height="50" Source="/Icons/kab.png"/>
+                                            <StackPanel  Margin="5">
+                                                <TextBlock FontSize="15" Text="{Binding NameUser}"/>
+                                                <TextBlock  Text="{Binding Date_insert,StringFormat= Дата написания {0:dd.MM.yyyy}}"
+                                                />
+                                            </StackPanel>
+                                            <Image VerticalAlignment="Top" Width="25" Height="25"  Source="/Icons/reting.png"/>
+                                            <TextBlock Margin="0,0,0,0"  VerticalAlignment="Top"
+                                                       x:Name="TextBlockDiscount"  FontSize="15"  Text="{Binding ozenka,StringFormat=' {0} '}"/>
+                                        </StackPanel>
+                                        <TextBlock  FontSize="15"  Text="{Binding Comment,StringFormat='Комментарий: {0} '}"/>
+                                    </StackPanel>
+                                </Border>
+                        </ItemContainerTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                </StackPanel>
+
+
+
             </Grid>
 
         </ScrollViewer>

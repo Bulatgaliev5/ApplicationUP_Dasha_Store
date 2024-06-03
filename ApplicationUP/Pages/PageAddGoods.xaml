@@ -31,8 +31,8 @@
                 <Label Content="В наличии" PreviewTextInput="IsValueNumberChech" FontFamily="Times New Roman" FontSize="20"/>
                 <TextBox x:Name="InputCount" FontFamily="Times New Roman" FontSize="20" />
 
-                <Border Style="{DynamicResource BorderBtn2}" MouseLeftButtonDown="CreateNewGoods">
-                    <Label Content="Добавить товар" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22" Background="#FFF7F7F7"/>
+                <Border Style="{DynamicResource BorderButton}" MouseLeftButtonDown="CreateNewGoods">
+                    <Label Content="Добавить товар" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22" />
                 </Border>
             </StackPanel>
         </ScrollViewer>

@@ -33,11 +33,11 @@
 
                     <UniformGrid Margin="30"  HorizontalAlignment="Stretch">
 
-                    <Border Width="200" HorizontalAlignment="Left" Style="{DynamicResource BorderBtn2}" MouseLeftButtonDown="UpdateUser">
-                            <Label HorizontalContentAlignment="Center" Content="Сохранить" VerticalContentAlignment="Center" Foreground="#FF0092FF" Background="#FFF9F9F9" FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
+                    <Border Width="200" HorizontalAlignment="Left" Style="{DynamicResource BorderButton}" MouseLeftButtonDown="UpdateUser">
+                            <Label HorizontalContentAlignment="Center" Content="Сохранить" VerticalContentAlignment="Center"  FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
                         </Border>
-                        <Border Width="200" HorizontalAlignment="Right" Style="{DynamicResource BorderBtn2}" MouseLeftButtonDown="Exit">
-                        <Label HorizontalContentAlignment="Center" Content="Выход" VerticalContentAlignment="Center" Background="#FFF7F7F7" Foreground="#FF0092FF" FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
+                    <Border Width="200" HorizontalAlignment="Right" Style="{DynamicResource BorderButton}" MouseLeftButtonDown="Exit">
+                        <Label HorizontalContentAlignment="Center" Content="Выход" VerticalContentAlignment="Center"  FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
                         </Border>
                     </UniformGrid>
 

@@ -2,9 +2,9 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ApplicationUP.Pages"
-      mc:Ignorable="d" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PageListGoods" Background="#FFF">
 
@@ -14,6 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel>
+            
             <Label Content="Список товаров" Style="{DynamicResource Title}" FontFamily="Times New Roman" FontSize="36" Foreground="#FF61B0EC" HorizontalContentAlignment="Center"/>
             <TextBox x:Name="tb1" TextChanged="tc" Width="430" HorizontalAlignment="Left"/>
             <StackPanel x:Name="stackPanel">
@@ -21,13 +22,16 @@
                 <RadioButton GroupName="Languages" Content="Цена по убыванию" Checked="pricepoubiv" FontFamily="Times New Roman" FontSize="20" Foreground="#FF61B0EC"/>
                 <RadioButton GroupName="Languages" Content="Цена по возрастанию" Checked="pricepovos" FontFamily="Times New Roman" FontSize="20" Foreground="#FF61B0EC"/>
             </StackPanel>
+
+            
         </StackPanel>
         
         <ScrollViewer Grid.Row="1">
+            
             <ItemsControl x:Name="GoodsData">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel ItemWidth="250"/>
+                        <WrapPanel ItemWidth="245"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
@@ -55,6 +59,16 @@
                                     <TextBlock Style="{DynamicResource GoodsDiscount}" Text="Скидка"/>
                                     <TextBlock x:Name="TextBlockDiscount"  Style="{DynamicResource GoodsCostOld}" Text="{Binding Discount,StringFormat=' {0} рублей'}"/>
                                     <TextBlock x:Name="TextBlockCost" Style="{DynamicResource GoodsCostNew}" Text="{Binding Cost,StringFormat=' {0} рублей'}"/>
+                                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                        <Image Width="30"  Source="/Icons/reting.png"/>
+                                        <TextBlock  Style="{DynamicResource GoodsCostNew}" Text="{Binding rating,StringFormat=' {0}'}"/>
+                                        <Border Margin="5,0,0,0"  CornerRadius="15"
+                                            Width="10" Height="10" Background="Gray"/>
+                                        <TextBlock  Style="{DynamicResource GoodsCostNew}" Text="{Binding reviews_count,StringFormat=' {0} оценок'}"/>
+                                    </StackPanel>
+                                  
+
+
                                 </StackPanel>
 
 
@@ -73,10 +87,10 @@
                                             <Image Style="{DynamicResource IconUser}" Source="/Icons/plus.png"/>
                                         </Border>
                                     </UniformGrid>
-                                    <Border MouseLeftButtonDown="openkartochagoods"  Style="{DynamicResource BorderBtn2}" >
+                                    <Border MouseLeftButtonDown="openkartochagoods"  Style="{DynamicResource BorderButton}" >
                                         <Label HorizontalContentAlignment="Center"  Content="Подробнее" FontFamily="Times New Roman" FontSize="20"/>
                                     </Border>
-                                    <Border MouseLeftButtonDown="addzakazat" Style="{DynamicResource BorderBtn2}" >
+                                    <Border MouseLeftButtonDown="addzakazat" Style="{DynamicResource BorderButton}" >
                                         <Label HorizontalContentAlignment="Center"  Content="Заказать" FontFamily="Times New Roman" FontSize="20"/>
                                     </Border>
 
@@ -87,6 +101,9 @@
                     </ItemContainerTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            
         </ScrollViewer>
+        
     </Grid>
+
 </Page>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace ApplicationUP.Template
 {
@@ -31,6 +32,16 @@ namespace ApplicationUP.Template
                     value = 1;
 
                 _count = value;
+                OnPropertyChanged("count");
+            }
+        }
+        private int _reviews_count;
+        public int reviews_count
+        {
+            get => _reviews_count;
+            set
+            {
+                _reviews_count = value;
                 OnPropertyChanged("count");
             }
         }
@@ -81,6 +92,18 @@ namespace ApplicationUP.Template
                     value = 0;
 
                 _Cost = value;
+            }
+        }
+        private float _rating;
+        public float rating
+        {
+            get => _rating;
+            set
+            {
+                if (value < 0)
+                    value = 0;
+
+                _rating = value;
             }
         }
 

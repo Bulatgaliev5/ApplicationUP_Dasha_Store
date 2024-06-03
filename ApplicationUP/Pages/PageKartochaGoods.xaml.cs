@@ -26,6 +26,8 @@ namespace ApplicationUP.Pages
     /// </summary>
     public partial class PageKartochaGoods : Page
     {
+        IList<Reviews>
+              reviews = new List<Reviews>();
         private int
                  ID, Count;
         private string
@@ -33,20 +35,30 @@ namespace ApplicationUP.Pages
         private string imageSourcelink;
         PageOformirovanie pageOformirovanie;
         MainWindow Win;
-        public PageKartochaGoods(MainWindow win ,int ID_Item, string userLogin, int count)
+        public PageKartochaGoods(MainWindow win ,int ID_Item, string userLogin, int count,float rating, int reviews_count)
         {
             InitializeComponent();
-
+            TextBlockRating.Text = rating.ToString();
+            TextBlockReviews_count.Text = string.Format(reviews_count.ToString()+" отзыва");
             ID = ID_Item;
             UserLogin = userLogin;
             Win = win;
             Count = count;
-            InputQantity.Text = string.Format( count.ToString()+ " шт.");
+            InputQantity.Text = string.Format(count.ToString() + " шт.");
+            ReviewsData.ItemsSource = reviews;
             Load();
         }
         private async void Load()
         {
+            NoReviews.Visibility = Visibility.Collapsed;
             await LoadGoods();
+            bool res = await LoadReviews();
+            if (!res)
+            {
+                NoReviews.Visibility = Visibility.Visible;
+                ReviewsData.Visibility = Visibility.Collapsed;
+            }
+            ReviewsData.Items.Refresh();
         }
 
 
@@ -92,7 +104,49 @@ namespace ApplicationUP.Pages
             await conn.GetClose();
             return;
         }
+        private async Task<bool> LoadReviews()
+        {
+            string
+                sql = "SELECT * FROM отзывы о " +
+                "JOIN пользователи п ON п.login = о.login_user " +
+                "JOIN заказы з ON о.id_zakaza = з.id_zakaza " +
+                "WHERE з.id_tovara = @id";
 
+            Connector
+                conn = new Connector();
+
+            MySqlCommand
+                cmd = new MySqlCommand(sql, conn.GetConn());
+
+            cmd.Parameters.Add(new MySqlParameter("@id", ID));
+            await conn.GetOpen();
+             
+            MySqlDataReader
+                 reader = await cmd.ExecuteReaderAsync();
+
+            if (!reader.HasRows)
+            {
+                await conn.GetClose();
+                return false;
+            }
+
+            while (await reader.ReadAsync())
+            {
+
+                reviews.Add(new Reviews()
+                {
+                    NameUser = reader["name"].ToString(),
+                    Comment = reader["comment"].ToString(),
+                    Date_insert = Convert.ToDateTime(reader["Date_insert"]),
+                    ozenka = Convert.ToInt32(reader["ozenka"]),
+
+                });
+            }
+
+            await conn.GetClose();
+            ReviewsData.ItemsSource = reviews;
+            return true;
+        }
 
 
         private bool IsValidText(TextBox box)

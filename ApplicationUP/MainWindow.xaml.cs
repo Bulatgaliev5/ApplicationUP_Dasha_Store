@@ -37,12 +37,15 @@ namespace ApplicationUP
             pageOformirovanie;
         PageUser
              pageUser;
+        PageListUser
+             pageListUser;
 
 
         public MainWindow(string name, int role_id, string role_name, string UserLogin)
         {
             InitializeComponent();
 
+            pageListUser = new PageListUser();
             pageUser = new PageUser(this, UserLogin);
             pageGoods = new PageAddGoods(name, role_id, role_name);
             pageListGoods = new PageListGoods(this, name, role_id, role_name, UserLogin);
@@ -163,7 +166,8 @@ namespace ApplicationUP
 
         private void MenuGoToPageListUser(object sender, MouseButtonEventArgs e)
         {
-
+            Frame1.NavigationService.Navigate(pageListUser);
+            pageListUser.ReloadData();
         }
     }
 }

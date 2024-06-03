@@ -15,6 +15,12 @@ namespace ApplicationUP.Template
             get => _count;
             set => _count = value;
         }
+        private int _id_tovara;
+        public int id_tovara
+        {
+            get => _id_tovara;
+            set => _id_tovara = value;
+        }
         private string _number_documenta;
         public string number_documenta
         {
@@ -42,7 +48,7 @@ namespace ApplicationUP.Template
 
 
         private string _status;
-       
+
 
         public string status
         {
@@ -94,6 +100,27 @@ namespace ApplicationUP.Template
         {
             get => _date;
             set => _date = value;
+        }
+
+        private Visibility _VizibileteInsertItziv;
+        public Visibility VizibileteInsertItziv
+        {
+            get => _VizibileteInsertItziv;
+            set => _VizibileteInsertItziv = value;
+        }
+
+        private string _comment;
+        public string comment
+        {
+            get => _comment;
+            set => _comment = value;
+        }
+
+        private Visibility _Vizibiletecomment;
+        public Visibility Vizibiletecomment
+        {
+            get => _Vizibiletecomment;
+            set => _Vizibiletecomment = value;
         }
     }
 }

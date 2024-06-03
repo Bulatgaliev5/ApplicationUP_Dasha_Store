@@ -38,9 +38,8 @@ namespace ApplicationUP.Pages
 
             window = main;
             role = (RoleGroup)role_id;
-            userlogin =  UserLogin;
-            // Коллекция товаров используется как источник данных для ItemsControl
-            zakazlistData.ItemsSource = zakazlist;
+            userlogin = UserLogin;
+
             // Вызов метода загрузки данных
             Load(userlogin);
         }
@@ -54,6 +53,15 @@ namespace ApplicationUP.Pages
 
             // Вызов метода загрузки данных
             await LoadGoods(login_user);
+            
+            for (int i = 0; i < zakazlist.Count; i++)
+            {
+                
+                await CheckGoodsOtziv(i, login_user, zakazlist[i].id_zakaza);
+               
+            }
+            await CheckStatus();
+
 
             // Обновление данных колекции
             zakazlistData.Items.Refresh();
@@ -62,7 +70,62 @@ namespace ApplicationUP.Pages
         {
             Load(userlogin);
         }
+        private async Task CheckStatus()
+        {
 
+
+            List<bool> results = zakazlist.Select(a => a.status != "Заказ доставлен" && a.comment==null).ToList();
+            for (int i = 0; i < zakazlist.Count; i++)
+            {
+                if (results[i])
+                {
+                    zakazlist[i].VizibileteInsertItziv = Visibility.Collapsed;
+                    zakazlist[i].Vizibiletecomment = Visibility.Collapsed;
+                }
+            }
+
+
+            zakazlistData.ItemsSource = zakazlist;
+        }
+        private async Task CheckGoodsOtziv(int i, string login_user, int id_zakaza)
+        {
+
+            string
+                sql = "SELECT * FROM отзывы where login_user=@login_user AND id_zakaza=@id_zakaza";
+            Connector
+                conn = new Connector();
+
+            MySqlCommand
+                cmd = new MySqlCommand(sql, conn.GetConn());
+            cmd.Parameters.Add(new MySqlParameter("@login_user", login_user));
+            cmd.Parameters.Add(new MySqlParameter("@id_zakaza", id_zakaza));
+            await conn.GetOpen();
+            MySqlDataReader
+                 reader = await cmd.ExecuteReaderAsync();
+
+            if (!reader.HasRows)
+            {
+                zakazlist[i].VizibileteInsertItziv = Visibility.Visible;
+                zakazlist[i].Vizibiletecomment = Visibility.Collapsed;
+                await conn.GetClose();
+                // Возращение false
+                return;
+            }
+            var date1 = DateTime.Now.ToString();
+            // Цикл while выполняется, пока есть строки для чтения из БД
+            while (await reader.ReadAsync())
+            {
+                zakazlist[i].VizibileteInsertItziv = Visibility.Collapsed;
+                zakazlist[i].comment = Convert.ToString(reader["comment"]);
+                zakazlist[i].Vizibiletecomment = Visibility.Visible;
+            }
+
+
+            await conn.GetClose();
+            zakazlistData.ItemsSource = zakazlist;
+            // Возращение true
+            return;
+        }
         private async Task LoadGoods(string login_user)
         {
             // Строка запроса
@@ -116,9 +179,8 @@ namespace ApplicationUP.Pages
                     date = Convert.ToDateTime(reader["date_zakaza"]),
                     count = Convert.ToInt32(reader["count"]),
                     status = Convert.ToString(reader["status"]),
-        
+                    id_tovara = Convert.ToInt32(reader["id_tovara"]),
                     itogovaya_summa = Convert.ToSingle(reader["itogovaya_summa"]),
-
                 });
 
 
@@ -134,7 +196,15 @@ namespace ApplicationUP.Pages
             // Возращение true
             return;
         }
-      
 
+        private void OstavitOtziv(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border b && b.DataContext is Zakaz z)
+            {
+                WindowOstavit_Otziv ostavit_Otziv = new WindowOstavit_Otziv(userlogin,z.id_zakaza);
+                ostavit_Otziv.ShowDialog();
+                Load(userlogin);
+            }
+        }
     }
 }

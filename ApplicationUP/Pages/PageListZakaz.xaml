@@ -20,7 +20,7 @@
             <ItemsControl x:Name="zakazlistData">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel ItemWidth="250"/>
+                        <WrapPanel ItemWidth="245"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
@@ -36,6 +36,12 @@
                                     <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding itogovaya_summa,StringFormat=Сумма заказа: {0} рублей}"/>
                                     <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding date,StringFormat=Дата заказа dd.MM.yyyy}"/>
                                     <TextBlock TextWrapping="Wrap"  Style="{DynamicResource GoodsCostNew}" Text="{Binding status,StringFormat=Статус: {0}}"/>
+                                    <Border Visibility="{Binding VizibileteInsertItziv}" Margin="5,5,5,5"  HorizontalAlignment="Center" MouseLeftButtonDown="OstavitOtziv" Style="{DynamicResource BorderButton}" >
+                                        <Label Margin="5" HorizontalContentAlignment="Center"  Content="Оставить отзыв" FontFamily="Times New Roman" FontSize="20"/>
+                                    </Border>
+                                    <StackPanel   Visibility="{Binding Vizibiletecomment}">
+                                        <TextBlock MaxHeight="60"  FontSize="15" TextWrapping="Wrap"  Text="{Binding comment,StringFormat=Комментарий: {0}}" TextTrimming="CharacterEllipsis"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </StackPanel>
                         </Border>

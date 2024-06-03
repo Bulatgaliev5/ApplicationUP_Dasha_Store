@@ -15,36 +15,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static ApplicationUP.Core.CoreSys;
 
 namespace ApplicationUP.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для PageListKorzina.xaml
+    /// Логика взаимодействия для PageZakazUser.xaml
     /// </summary>
-    /// 
-    public partial class PageListZakazAdmin : Page
+    public partial class PageZakazUser : Page
     {
-        IList<Zakaz>
-              zakazlist = new List<Zakaz>();
-        MainWindow
-            window;
-        RoleGroup
-            role;
+        public string Login;
+        IList<ZakazUser>
+            zakazlist = new List<ZakazUser>();
 
-        public PageListZakazAdmin(MainWindow main, string name, int role_id, string role_name)
+        public PageZakazUser(string login)
         {
             InitializeComponent();
-
-            window = main;
-            role = (RoleGroup)role_id;
-            // Коллекция товаров используется как источник данных для ItemsControl
-            zakazlistData.ItemsSource = zakazlist;
-            // Вызов метода загрузки данных
-            Load();
+            Login = login;
+            Load(Login);
         }
-
-        public async void Load()
+        public async void Load(string login_user)
         {
             // Список товаров опусташается
             zakazlist.Clear();
@@ -52,38 +41,33 @@ namespace ApplicationUP.Pages
             zakazlistData.Items.Refresh();
 
             // Вызов метода загрузки данных
-            await LoadGoods();
-            await CheckStatus();
+            await LoadZakaz(login_user);
+
+            if (zakazlist.Count==0)
+            {
+                zakazlistData.Visibility = Visibility.Collapsed;
+                NoItemsZakazVisible.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                zakazlistData.Visibility = Visibility.Visible;
+                NoItemsZakazVisible.Visibility = Visibility.Collapsed;
+            }
+
+            await LoadUser(login_user);
+
             // Обновление данных колекции
             zakazlistData.Items.Refresh();
         }
-        private async Task CheckStatus()
-        {
-
-
-            List<bool> results = zakazlist.Select(a => a.status == "Заказ доставлен").ToList();
-            for (int i = 0; i < zakazlist.Count; i++)
-            {
-                if (results[i])
-                {
-                    zakazlist[i].VizibileteInsertItziv = Visibility.Collapsed;
-                }
-            }
-
-
-            zakazlistData.ItemsSource = zakazlist;
-        }
         public void ReloadData()
         {
-            Load();
+            Load(Login);
         }
-
-        private async Task LoadGoods()
+        private async Task LoadUser(string login_user)
         {
             // Строка запроса
             string
-                sql = "SELECT * FROM заказы з " +
-                "JOIN пользователи п ON п.login = з.login_user";
+                sql = "SELECT * FROM пользователи where login=@login_user AND role_id=2";
 
             // Объявление переменной на основе класс подключения:
             // >    Connector conn
@@ -92,13 +76,70 @@ namespace ApplicationUP.Pages
 
             Connector
                 conn = new Connector();
-           
+
             // Объявление объекта команды:
             // >    MySqlCommand cmd
             // Инициализация объекта команды:
             // >    new MySqlCommand(sql, conn.GetConn());
             MySqlCommand
                 cmd = new MySqlCommand(sql, conn.GetConn());
+            cmd.Parameters.Add(new MySqlParameter("@login_user", login_user));
+            // Асинхронное подключение к БД
+            await conn.GetOpen();
+
+            // Объявление и инициалзиация метода асинрхонного чтения данных из бд
+            MySqlDataReader
+                 reader = await cmd.ExecuteReaderAsync();
+
+            // Проверка, что строк нет
+            if (!reader.HasRows)
+            {
+                // Список товаров опусташается
+                zakazlist.Clear();
+                // Асинхронное отключение от БД
+                await conn.GetClose();
+                // Возращение false
+                return;
+            }
+            var date1 = DateTime.Now.ToString();
+            // Цикл while выполняется, пока есть строки для чтения из БД
+            while (await reader.ReadAsync())
+            {
+
+                TextBlockName.Text = string.Format("Логин: "+ reader["login"].ToString());
+                TextBlockLogin.Text = string.Format("Имя: " + reader["name"].ToString());
+                TextBlockNumaber_tel.Text = string.Format("Номер телефона: " + reader["numaber_tel"].ToString());
+
+
+            }
+
+            // Асинхронное отключение от БД
+            await conn.GetClose();
+            zakazlistData.ItemsSource = zakazlist;
+            // Возращение true
+            return;
+        }
+        private async Task LoadZakaz(string login_user)
+        {
+            // Строка запроса
+            string
+                sql = "SELECT * FROM заказы where login_user=@login_user";
+
+            // Объявление переменной на основе класс подключения:
+            // >    Connector conn
+            // Инициализация переменной:
+            // >    = new Connector()
+
+            Connector
+                conn = new Connector();
+
+            // Объявление объекта команды:
+            // >    MySqlCommand cmd
+            // Инициализация объекта команды:
+            // >    new MySqlCommand(sql, conn.GetConn());
+            MySqlCommand
+                cmd = new MySqlCommand(sql, conn.GetConn());
+            cmd.Parameters.Add(new MySqlParameter("@login_user", login_user));
             // Асинхронное подключение к БД
             await conn.GetOpen();
 
@@ -121,7 +162,7 @@ namespace ApplicationUP.Pages
             while (await reader.ReadAsync())
             {
                 // Добавление элемента в коллекцию списка товаров на основе класса (Экземпляр класс создается - объект)
-                zakazlist.Add(new Zakaz()
+                zakazlist.Add(new ZakazUser()
                 {
                     id_zakaza = Convert.ToInt32(reader["id_zakaza"]),
                     loginuser = Convert.ToString(reader["login_user"]),
@@ -132,17 +173,14 @@ namespace ApplicationUP.Pages
                     count = Convert.ToInt32(reader["count"]),
                     status = Convert.ToString(reader["status"]),
                     itogovaya_summa = Convert.ToSingle(reader["itogovaya_summa"]),
-                    number_documenta = Convert.ToString(reader["number_documenta"]),
                     adress_dostavki = Convert.ToString(reader["adress_dostavki"]),
-                    nameuser = Convert.ToString(reader["name"]),
-
                 });
 
 
                 // Обновление данных колекции
                 //zakazlistData.Items.Refresh();
                 // Время ожидания (Время "Сна")
-               
+
             }
 
             // Асинхронное отключение от БД
@@ -150,20 +188,6 @@ namespace ApplicationUP.Pages
             zakazlistData.ItemsSource = zakazlist;
             // Возращение true
             return;
-        }
-
-        private void UpdateStatus(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is Border b && b.DataContext is Zakaz g)
-            {
-                PageUpdateStatus pageUpdateStatus = new PageUpdateStatus(g.id_zakaza);
-                this.Opacity = 0.5;
-                pageUpdateStatus.ShowDialog();
-                Load();
-                pageUpdateStatus.Focus();
-                this.Opacity = 1;
-               
-            }
         }
     }
 }
