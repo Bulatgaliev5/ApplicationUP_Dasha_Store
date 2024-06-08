@@ -13,6 +13,7 @@ using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Data;
 using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
 
 namespace ApplicationUP.Pages
 {
@@ -50,10 +51,10 @@ namespace ApplicationUP.Pages
         public async void Load()
         {
             // Список товаров опусташается
-      
-        
+
+            goods.Clear();
             // Обновление данных колекции
-          //  GoodsData.Items.Refresh();
+            //  GoodsData.Items.Refresh();
 
             // Вызов метода загрузки данных
             await LoadGoods();
@@ -328,6 +329,8 @@ namespace ApplicationUP.Pages
 
         private void pricedefault(object sender, RoutedEventArgs e)
         {
+            GoodsData.ItemsSource = null;
+            
             Load();
         }
 
@@ -347,7 +350,7 @@ namespace ApplicationUP.Pages
         {
             if (sender is Border b && b.DataContext is Goods g)
             {
-                pageKartocha = new PageKartochaGoods(window, g.ID, Loginuser,g.count, g.rating, g.reviews_count);
+                pageKartocha = new PageKartochaGoods(window, role, g.ID, Loginuser,g.count, g.rating, g.reviews_count);
                 NavigationService.Navigate(pageKartocha);
             }
 

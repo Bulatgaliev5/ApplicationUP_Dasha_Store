@@ -22,21 +22,26 @@
                 <TextBox x:Name="InputName" />
                 <Label Content="Описание" FontFamily="Times New Roman" FontSize="20"/>
                 <TextBox x:Name="InputDesc" />
-                <Label Content="Цена" FontFamily="Times New Roman" FontSize="20"/>
+                <Label Content="Новая цена, руб" FontFamily="Times New Roman" FontSize="20"/>
                 <TextBox x:Name="InputCost"  PreviewTextInput="IsValueNumberChech"/>
-                <Label Content="Скидка" FontFamily="Times New Roman" FontSize="20"/>
+                <Label Content="Старая цена, руб" FontFamily="Times New Roman" FontSize="20"/>
                 <TextBox x:Name="InputDiscount" PreviewTextInput="IsValueNumberChech"/>
                 <Label Content="Картинка" FontFamily="Times New Roman" FontSize="20"/>
                 <TextBox x:Name="InputImg" />
-                <Label Content="В наличии" PreviewTextInput="IsValueNumberChech" FontFamily="Times New Roman" FontSize="20"/>
-                <TextBox x:Name="InputCount" />
+                <Label Content="В наличии"  FontFamily="Times New Roman" FontSize="20"/>
+                <TextBox PreviewTextInput="IsValueNumberChech" x:Name="InputCount" />
 
-                <Border Style="{DynamicResource BorderButton}" MouseLeftButtonDown="UpdateGoods">
-                    <Label Content="Изменить" VerticalContentAlignment="Center"  FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
-                </Border>
-                <Border Style="{DynamicResource BorderButton}" MouseLeftButtonDown="CanselPage">
-                    <Label Content="Отмена" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
-                </Border>
+
+                <UniformGrid Margin="0,15,0,0">
+                    <Border   HorizontalAlignment="Center"  Style="{DynamicResource BorderButton}" MouseLeftButtonDown="UpdateGoods">
+                        <Label Margin="15,5,15,5" HorizontalAlignment="Center" Content="Изменить" VerticalContentAlignment="Center"  FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
+                    </Border>
+                    <Border HorizontalAlignment="Center"  Style="{DynamicResource BorderButton}" MouseLeftButtonDown="CanselPage">
+                        <Label Margin="15,5,15,5" Content="Отмена" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="20" FontWeight="Bold"/>
+                    </Border>
+                </UniformGrid>
+
+
             </StackPanel>
         </ScrollViewer>
 

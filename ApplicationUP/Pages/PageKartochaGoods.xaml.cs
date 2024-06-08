@@ -35,18 +35,43 @@ namespace ApplicationUP.Pages
         private string imageSourcelink;
         PageOformirovanie pageOformirovanie;
         MainWindow Win;
-        public PageKartochaGoods(MainWindow win ,int ID_Item, string userLogin, int count,float rating, int reviews_count)
+        RoleGroup role;
+        public PageKartochaGoods(MainWindow win, RoleGroup Role_id, int ID_Item, string userLogin, int count, float rating, int reviews_count)
         {
             InitializeComponent();
             TextBlockRating.Text = rating.ToString();
-            TextBlockReviews_count.Text = string.Format(reviews_count.ToString()+" отзыва");
+            TextBlockReviews_count.Text = string.Format(reviews_count.ToString() + " отзыва");
             ID = ID_Item;
             UserLogin = userLogin;
             Win = win;
             Count = count;
             InputQantity.Text = string.Format(count.ToString() + " шт.");
             ReviewsData.ItemsSource = reviews;
+            role = Role_id;
+            switch (Role_id)
+            {
+                case RoleGroup.Admin:
+                    btnzakazat.Visibility = Visibility.Collapsed;
+                    break;
+                case RoleGroup.User:
+                    btnzakazat.Visibility = Visibility.Visible;
+                    break;
+
+            }
+
             Load();
+        }
+        private bool TypeRoleGet(RoleGroup group)
+        {
+            switch (group)
+            {
+
+                case RoleGroup.Admin:
+                    return true;
+                default:
+                    return false;
+            }
+
         }
         private async void Load()
         {

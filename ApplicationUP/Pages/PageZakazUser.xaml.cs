@@ -189,5 +189,10 @@ namespace ApplicationUP.Pages
             // Возращение true
             return;
         }
+
+        private void MenuGoToPageExit(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }

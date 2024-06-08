@@ -363,6 +363,9 @@
   <ItemGroup>
     <Resource Include="Icons\reting.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\delete_user.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -70,8 +70,8 @@ namespace ApplicationUP.Pages
                 
                 InputName.Text = reader["name"].ToString();
                 InputDesc.Text = reader["Desc"].ToString();
-                InputCost.Text = reader["Cost"].ToString();
-                InputDiscount.Text = reader["Discount"].ToString();
+                InputCost.Text = Convert.ToSingle(reader["Cost"]).ToString();
+                InputDiscount.Text = Convert.ToSingle(reader["Discount"]).ToString();
                 InputImg.Text = reader["Img"].ToString();
                 InputCount.Text = reader["V_nalichii"].ToString();
                 

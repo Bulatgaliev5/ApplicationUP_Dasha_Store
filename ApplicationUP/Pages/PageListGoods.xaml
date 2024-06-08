@@ -16,12 +16,22 @@
         <StackPanel>
             
             <Label Content="Список товаров" Style="{DynamicResource Title}" FontFamily="Times New Roman" FontSize="36" Foreground="#FF61B0EC" HorizontalContentAlignment="Center"/>
-            <TextBox x:Name="tb1" TextChanged="tc" Width="430" HorizontalAlignment="Left"/>
-            <StackPanel x:Name="stackPanel">
-                <RadioButton GroupName="Languages" Content="Цена по умолчанию" Checked="pricedefault"  FontFamily="Times New Roman" FontSize="20" Foreground="#FF61B0EC"/>
-                <RadioButton GroupName="Languages" Content="Цена по убыванию" Checked="pricepoubiv" FontFamily="Times New Roman" FontSize="20" Foreground="#FF61B0EC"/>
-                <RadioButton GroupName="Languages" Content="Цена по возрастанию" Checked="pricepovos" FontFamily="Times New Roman" FontSize="20" Foreground="#FF61B0EC"/>
-            </StackPanel>
+            <Grid Margin="15" HorizontalAlignment="Stretch" >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                    <TextBlock VerticalAlignment="Center" FontSize="20" Text="Поиск"/>
+                    <TextBox FontSize="25" Height="40   " Margin="15,0,0,0" x:Name="tb1" TextChanged="tc" Width="430" HorizontalAlignment="Left"/>
+                </StackPanel>
+               
+                <StackPanel  Margin="0,0,95,0" HorizontalAlignment="Right" x:Name="stackPanel">
+                    <TextBlock HorizontalAlignment="Center" FontSize="20" Text="Сортировка"/>
+                    <RadioButton Margin="0,5,0,0" GroupName="Languages" Content="Цена по умолчанию" Checked="pricedefault"  FontFamily="Times New Roman" FontSize="20"
+                          IsChecked="True"       Foreground="#FF61B0EC"/>
+                    <RadioButton GroupName="Languages" Content="Цена по убыванию" Checked="pricepoubiv" FontFamily="Times New Roman" FontSize="20" Foreground="#FF61B0EC"/>
+                    <RadioButton GroupName="Languages" Content="Цена по возрастанию" Checked="pricepovos" FontFamily="Times New Roman" FontSize="20" Foreground="#FF61B0EC"/>
+                </StackPanel>
+            </Grid>
+
+
 
             
         </StackPanel>
@@ -56,8 +66,9 @@
 
                                     <TextBlock  Text="{Binding CountInContainer,StringFormat='В наличии: {0} шт.'}"
                                         FontSize="15"        Margin="0,0,0,5"/>
-                                    <TextBlock Style="{DynamicResource GoodsDiscount}" Text="Скидка"/>
+                                    <TextBlock Style="{DynamicResource GoodsDiscount}" Text="Старая цена"/>
                                     <TextBlock x:Name="TextBlockDiscount"  Style="{DynamicResource GoodsCostOld}" Text="{Binding Discount,StringFormat=' {0} рублей'}"/>
+                                    <TextBlock Style="{DynamicResource GoodsDiscount}" Text="Цена с учетом скидки"/>
                                     <TextBlock x:Name="TextBlockCost" Style="{DynamicResource GoodsCostNew}" Text="{Binding Cost,StringFormat=' {0} рублей'}"/>
                                     <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                                         <Image Width="30"  Source="/Icons/reting.png"/>
@@ -87,15 +98,15 @@
                                             <Image Style="{DynamicResource IconUser}" Source="/Icons/plus.png"/>
                                         </Border>
                                     </UniformGrid>
-                                    <Border MouseLeftButtonDown="openkartochagoods"  Style="{DynamicResource BorderButton}" >
-                                        <Label HorizontalContentAlignment="Center"  Content="Подробнее" FontFamily="Times New Roman" FontSize="20"/>
-                                    </Border>
+
                                     <Border MouseLeftButtonDown="addzakazat" Style="{DynamicResource BorderButton}" >
                                         <Label HorizontalContentAlignment="Center"  Content="Заказать" FontFamily="Times New Roman" FontSize="20"/>
                                     </Border>
 
                                 </StackPanel>
-                              
+                                <Border MouseLeftButtonDown="openkartochagoods"  Style="{DynamicResource BorderButton}" >
+                                    <Label HorizontalContentAlignment="Center"  Content="Подробнее" FontFamily="Times New Roman" FontSize="20"/>
+                                </Border>
                             </StackPanel>
                         </Border>
                     </ItemContainerTemplate>

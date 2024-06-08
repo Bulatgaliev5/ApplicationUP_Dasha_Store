@@ -13,8 +13,17 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel>
-            <Label Content="Добавление нового товара" Style="{DynamicResource Title}" FontFamily="Times New Roman" FontSize="36" Foreground="#FFFFFCFC" HorizontalContentAlignment="Center"/>
+        <StackPanel Orientation="Horizontal">
+            
+            <Border HorizontalAlignment="Left"  x:Name="ButtonExit" Style="{DynamicResource BorderButton}" MouseLeftButtonDown="MenuGoToPageExit" >
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel VerticalAlignment="Center" Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
+                        <Image Source="/Image/Exit.png" Margin="5" Width="20"/>
+                    </StackPanel>
+                    <Label Content="Назад" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22"/>
+                </StackPanel>
+            </Border>
+            <Label Margin="100,0,0,0" Content="Добавление нового товара" Style="{DynamicResource Title}" FontFamily="Times New Roman" FontSize="36" Foreground="#FFFFFCFC" HorizontalContentAlignment="Center"/>
         </StackPanel>
         <ScrollViewer Grid.Row="1">
             <StackPanel Margin="5">
@@ -22,18 +31,24 @@
                 <TextBox x:Name="InputName" FontFamily="Times New Roman" FontSize="20" />
                 <Label Content="Описание" FontFamily="Times New Roman" FontSize="20"/>
                 <TextBox x:Name="InputDesc" FontFamily="Times New Roman" FontSize="20" />
-                <Label Content="Цена" FontFamily="Times New Roman" FontSize="20"/>
+                <Label Content="Новая цена, руб" FontFamily="Times New Roman" FontSize="20"/>
                 <TextBox x:Name="InputCost"  PreviewTextInput="IsValueNumberChech" FontFamily="Times New Roman" FontSize="20"/>
-                <Label Content="Скидка" FontFamily="Times New Roman" FontSize="20"/>
+                <Label Content="Старая цена, руб" FontFamily="Times New Roman" FontSize="20"/>
                 <TextBox x:Name="InputDiscount" PreviewTextInput="IsValueNumberChech" FontFamily="Times New Roman" FontSize="20"/>
                 <Label Content="Картинка" FontFamily="Times New Roman" FontSize="20"/>
                 <TextBox x:Name="InputImg" FontFamily="Times New Roman" FontSize="20" />
-                <Label Content="В наличии" PreviewTextInput="IsValueNumberChech" FontFamily="Times New Roman" FontSize="20"/>
-                <TextBox x:Name="InputCount" FontFamily="Times New Roman" FontSize="20" />
+                <Label Content="В наличии"  FontFamily="Times New Roman" FontSize="20"/>
+                <TextBox PreviewTextInput="IsValueNumberChech" x:Name="InputCount" FontFamily="Times New Roman" FontSize="20" />
 
-                <Border Style="{DynamicResource BorderButton}" MouseLeftButtonDown="CreateNewGoods">
-                    <Label Content="Добавить товар" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22" />
-                </Border>
+                <UniformGrid Margin="0,15,0,0">
+                    <Border Style="{DynamicResource BorderButton}" Width="auto" HorizontalAlignment="Center"  MouseLeftButtonDown="CreateNewGoods">
+                        <Label  Width="auto" Content="Добавить товар" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22" />
+                    </Border>
+                    <Border Style="{DynamicResource BorderButton}" Width="auto" HorizontalAlignment="Center"  MouseLeftButtonDown="clear">
+                        <Label  Width="auto" Content="Очистить" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22" />
+                    </Border>
+                </UniformGrid>
+
             </StackPanel>
         </ScrollViewer>
 

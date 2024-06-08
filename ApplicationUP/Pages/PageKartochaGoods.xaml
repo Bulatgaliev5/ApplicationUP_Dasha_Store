@@ -63,7 +63,7 @@
                     <Label Content="Качество" FontFamily="Times New Roman" FontSize="20"/>
                     <TextBlock TextWrapping="Wrap" x:Name="InputKachestvo" />
 
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" x:Name="btnzakazat">
                         <Border Margin="5,50,5,5"  HorizontalAlignment="Center" MouseLeftButtonDown="addzakazat" Style="{DynamicResource BorderButton}" >
                             <Label Margin="5" HorizontalContentAlignment="Center"  Content="Заказать" FontFamily="Times New Roman" FontSize="20"/>
                         </Border>

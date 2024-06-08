@@ -19,11 +19,7 @@
         </StackPanel>
         <ScrollViewer Grid.Row="1">
             <StackPanel Margin="5">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Логин:" FontFamily="Times New Roman" FontSize="20"/>
-                    <TextBlock  FontSize="20" Text="{Binding Login}" x:Name="InputLogin" />
-                    
-                </StackPanel>
+
                 <Label Content="Имя" FontFamily="Times New Roman" FontSize="20"/>
                 <TextBox Text="{Binding Name}" FontSize="20" x:Name="InputName" />
                 <Label Content="Номер телефона" FontFamily="Times New Roman" FontSize="20"/>

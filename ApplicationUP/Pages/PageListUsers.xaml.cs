@@ -23,12 +23,12 @@ namespace ApplicationUP.Pages
         IList<User>
             UserList = new List<User>();
 
-        PageZakazUser PageZakaz; 
+        PageZakazUser PageZakaz;
         // Конструктор
         public PageListUser()
         {
             InitializeComponent();
-           
+
             // Коллекция товаров используется как источник данных для ItemsControl
             UserData.ItemsSource = UserList;
             // Вызов метода загрузки данных
@@ -38,10 +38,10 @@ namespace ApplicationUP.Pages
         public async void Load()
         {
             // Список товаров опусташается
-      
-        
+
+
             // Обновление данных колекции
-          //  GoodsData.Items.Refresh();
+            //  GoodsData.Items.Refresh();
 
             // Вызов метода загрузки данных
             await LoadGoods();
@@ -49,7 +49,7 @@ namespace ApplicationUP.Pages
             // Обновление данных колекции
 
             UserData.Items.Refresh();
-          
+
         }
 
         public void ReloadData()
@@ -101,7 +101,7 @@ namespace ApplicationUP.Pages
 
             // Асинхронное отключение от БД
             await conn.GetClose();
-                  UserData.ItemsSource = UserList;
+            UserData.ItemsSource = UserList;
             // Возращение true
             return;
         }
@@ -118,7 +118,69 @@ namespace ApplicationUP.Pages
                 PageZakaz = new PageZakazUser(user.Login);
                 NavigationService.Navigate(PageZakaz);
             }
-          
+
+        }
+
+        private async void btndelete(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border b && b.DataContext is User g)
+            {
+                if (MessageBox.Show(
+                    string.Format("Вы действительно собираетесь удалить профиль пользователя - {0}", g.Name),
+                    "Внимание!",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning
+                    ) != MessageBoxResult.Yes)
+                    return;
+
+                if (!await UserDeleteSQL(g.Login))
+                {
+                    MessageBox.Show("Данный профиль не удален", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                MessageBox.Show("Данный профиль удален", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+                CleanListData(g.Login);
+            }
+        }
+
+        private async Task<bool> UserDeleteSQL(string login)
+
+        {
+            string
+                sql = "DELETE FROM пользователи WHERE login=@login";
+
+            Connector
+                conn = new Connector();
+
+            MySqlCommand
+                cmd = new MySqlCommand(sql, conn.GetConn());
+
+            cmd.Parameters.Add(new MySqlParameter("@login", login));
+
+            await conn.GetOpen();
+
+            if (await cmd.ExecuteNonQueryAsync() == 1)
+            {
+                await conn.GetClose();
+                return true;
+            }
+
+            await conn.GetClose();
+            return false;
+        }
+
+        private void CleanListData(string login)
+        {
+            foreach (User user in UserList)
+            {
+                if (user.Login != login)
+                    continue;
+
+                UserList.Remove(user);
+                UserData.Items.Refresh();
+                return;
+            }
         }
     }
 }

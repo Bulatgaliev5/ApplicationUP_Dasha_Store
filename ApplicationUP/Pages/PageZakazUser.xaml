@@ -14,8 +14,15 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Margin="15" Grid.Column="0">
-            
-        <StackPanel Margin="15">
+            <Border HorizontalAlignment="Left"  x:Name="ButtonExit" Style="{DynamicResource BorderButton}" MouseLeftButtonDown="MenuGoToPageExit" Background="#FFE1F3F9">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel VerticalAlignment="Center" Style="{DynamicResource IconBack}" Background="#FFE1F3F9">
+                        <Image Source="/Image/Exit.png" Margin="5" Width="20"/>
+                    </StackPanel>
+                    <Label Content="Назад" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="22"/>
+                </StackPanel>
+            </Border>
+            <StackPanel Margin="15">
             <Image Width="100" Height="100" Source="/Icons/kab.png"/>
         </StackPanel>
 

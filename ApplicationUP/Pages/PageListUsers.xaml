@@ -21,35 +21,37 @@
             <ItemsControl x:Name="UserData">
                 <ItemsControl.ItemTemplate>
                     <ItemContainerTemplate>
-                        <Border MouseLeftButtonDown="openkuserlistzakaz" Style="{DynamicResource BorderButtonBlock}" >
-                           
+                        <StackPanel>
+                            <Border MouseLeftButtonUp="openkuserlistzakaz" Style="{DynamicResource BorderButtonBlock}" >
+
                                 <Grid HorizontalAlignment="Stretch">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="300"/>
-                                </Grid.ColumnDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="300"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <StackPanel  Margin="15,0,0,0" Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Left">
-                                    <Image  Width="50" Height="50" Margin="5" Source="/Icons/kab.png" />
-                                    <StackPanel  HorizontalAlignment="Stretch" Margin="5" Orientation="Horizontal">
-                                        <StackPanel  Margin="5">
-                                            <TextBlock Style="{DynamicResource GoodsCostNew}" Text="{Binding Login}"/>
-                                        <TextBlock  Style="{DynamicResource GoodsDesc}" Text="{Binding Name}"/>
-                                            <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding Numaber_tel}"/>
+                                    <StackPanel  Margin="15,0,0,0" Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Left">
+                                        <Image  Width="50" Height="50" Margin="5" Source="/Icons/kab.png" />
+                                        <StackPanel  HorizontalAlignment="Stretch" Margin="5" Orientation="Horizontal">
+                                            <StackPanel  Margin="5">
+                                                <TextBlock Style="{DynamicResource GoodsCostNew}" Text="{Binding Login}"/>
+                                                <TextBlock  Style="{DynamicResource GoodsDesc}" Text="{Binding Name}"/>
+                                                <TextBlock Style="{DynamicResource GoodsDesc}" Text="{Binding Numaber_tel}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
                                     </StackPanel>
-                                    </StackPanel>
-                                </StackPanel>
+                                    <Border Grid.Column="1"  Margin="0,0,15,0" HorizontalAlignment="Right"  ToolTip="Удалить профиль"
+                                            x:Name="ButtonExit"  MouseLeftButtonDown="btndelete" >
 
-                               
-                            </Grid>
+                                                <Image Source="/Icons/delete_user.png" Margin="5" Height="50" Width="50"/>
 
+                                    </Border>
 
-                                
-
-                                
-                           
-                            
-                        </Border>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                       
                         
                     </ItemContainerTemplate>
                 </ItemsControl.ItemTemplate>

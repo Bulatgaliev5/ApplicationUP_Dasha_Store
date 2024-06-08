@@ -108,5 +108,20 @@ namespace ApplicationUP.Pages
         {
             e.Handled = Regex.IsMatch(e.Text, @"[^0-9]$");
         }
+
+        private void MenuGoToPageExit(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
+        private void clear(object sender, MouseButtonEventArgs e)
+        {
+            InputName.Text = "";
+            InputDesc.Text = "";
+            InputCost.Text = "";
+            InputDiscount.Text = "";
+            InputImg.Text = "";
+            InputCount.Text = "";
+        }
     }
 }
